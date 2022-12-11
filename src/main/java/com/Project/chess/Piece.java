@@ -48,10 +48,10 @@ public abstract class Piece {
 		this.color = color;
 	}
 	
-	public Piece attackPiece(Piece piece) {
-		return this;
+	public void attackPiece(Cell finalCell) {
 	}
-	public void makeMove(Move move) {
+	public boolean makeMove(Cell finalCell) {
+		return false;
 	}
 	public void calcMoves() {
 	}
