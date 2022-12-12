@@ -8,8 +8,8 @@ public class King extends Piece {
 	final ArrayList<Vector> authorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(1,0),new Vector(1,1), new Vector(0,1), new Vector(-1,1), new Vector(-1,0), new Vector(-1,-1), new Vector(0, -1), new Vector(1,-1)));
 	static Type type = Type.KING;
 
-	public King (Cell cell, Player player) {
-		super(cell, player);
+	public King (Player player) {
+		super( player);
 	}
 
 	public boolean validMove(Cell finalCell){

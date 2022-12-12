@@ -1,19 +1,26 @@
 package com.Project.chess;
 
+import javafx.scene.control.Label;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cell {
 	public Piece piece;
 	public int[] emplacment = new int[2];
 	public Clr color;
 	public Board board ;
-	
-	public Cell(int coordX, int coordY, Board board) {
+	public Label tile = new Label();
+	HashMap<String,Label> tiles = new HashMap<>();
+
+
+
+	public Cell(int coordX, int coordY) {
 		piece = null;
 		emplacment[0] = coordX;
 		emplacment[1] = coordY;
 		this.color = null;
-		this.board = board;
+		this.board = null;
 	}
 
 	public Piece getPiece() {
@@ -38,6 +45,15 @@ public class Cell {
 
 	public void setColor(Clr color) {
 		this.color = color;
+	}
+	public Label getTile() {
+		return this.tile;
+	}
+
+	public void setTile(Label value) {
+		this.tile = value;
+		tiles.put(String.valueOf(emplacment[0]).concat(String.valueOf(emplacment[1])),this.tile);
+
 	}
 
 

@@ -6,8 +6,8 @@ public class Rook extends Piece {
 	public ArrayList<Vector> authorizedMoves = new ArrayList<Vector>();
 	static Type type = Type.ROOK;
 	
-	public Rook(Cell cell, Player player) {
-		super(cell, player);
+	public Rook( Player player) {
+		super( player);
 	}
 
 	

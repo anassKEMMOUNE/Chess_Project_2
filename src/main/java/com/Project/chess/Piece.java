@@ -1,17 +1,23 @@
 package com.Project.chess;
 
+import javafx.scene.image.ImageView;
+
 public abstract class Piece {
 	public Cell cell;
 	public Player player;
 	public boolean isInGame;
-	public Clr color;
+
+	public ImageView imageWhite;
+	public ImageView imageBlack;
+
 	
 	
-	public Piece(Cell cell, Player player){
-		this.cell = cell;
+	public Piece( Player player){
+		this.cell = null;
 		this.player = player;
 		this.isInGame = true;
-		this.color = player.getColor();
+		this.imageWhite = null;
+		this.imageBlack = null;
 	}
 	
 	public Cell getCell() {
@@ -21,6 +27,7 @@ public abstract class Piece {
 
 	public void setCell(Cell cell) {
 		this.cell = cell;
+
 	}
 
 
@@ -41,13 +48,36 @@ public abstract class Piece {
 	}
 
 	public Clr getColor() {
-		return color;
+		return this.player.getColor();
 	}
 
 	public void setColor(Clr color) {
-		this.color = color;
+		this.player.setColor(color);
 	}
-	
+	public ImageView getImageBlack(){
+		return this.imageBlack;
+	}
+	public ImageView getImageWhite(){
+		return this.imageWhite;
+	}
+	public ImageView getImage() {
+		if (getColor() == Clr.BLACK){
+			 return getImageBlack();}
+		else {
+			 return getImageWhite();
+
+		}
+	}
+
+	public void setImageWhite(ImageView value) {
+		this.imageWhite = value;
+	}
+	public void setImageBlack(ImageView value) {
+		this.imageBlack = value;
+	}
+	public void getClickStatus(){
+		System.out.println(this.getImage().getOnMouseClicked());
+	}
 	public void attackPiece(Cell finalCell) {
 	}
 	public boolean makeMove(Cell finalCell) {

@@ -1,5 +1,7 @@
 package com.Project.chess;
 
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,8 +16,10 @@ public class Pawn extends Piece{
 
 
 
-	public Pawn (Cell cell, Player player) {
-		super(cell, player);
+	public Pawn ( Player player) {
+		super( player);
+		this.setImageBlack(new ImageView("C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\pawnWhite.png"));
+		this.setImageWhite(new ImageView("C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\pawnWhite.png"));
 	}
 	public boolean validAttack(Cell finalCell){
 		if(finalCell.getEmplacment()[0]> 8 || finalCell.getEmplacment()[1]> 8 || finalCell.isEmpty() || this.getColor() == finalCell.getPiece().getColor() ){
@@ -45,7 +49,7 @@ public class Pawn extends Piece{
 			return false;
 		}
 		else{
-			if (color == Clr.WHITE) {
+			if (this.player.color == Clr.WHITE) {
 				return whiteAuthorizedMoves.contains(moveVector);
 			}
 			else {
@@ -64,7 +68,7 @@ public class Pawn extends Piece{
 		}
 	}
 
-	public boolean transformToQueen(){
+	/*public boolean transformToQueen(){
 		if(this.getCell().getEmplacment()[1] == 8 ||  this.getCell().getEmplacment()[1] == -8 ) {
 			Queen queen = new Queen(this.getCell(), this.getPlayer());
 			this.getCell().setPiece(null);
@@ -72,9 +76,9 @@ public class Pawn extends Piece{
 			return true;
 		}
 		return false;
-	}
+	}*/
 
-	public boolean makeMove(Cell finalCell){
+	/*public boolean makeMove(Cell finalCell){
 		if(validNormalMove(finalCell))
 		{
 			finalCell.setPiece(this);
@@ -87,7 +91,7 @@ public class Pawn extends Piece{
 		}
 		return this.transformToQueen();
 
-	}
+	}*/
 }
 
 

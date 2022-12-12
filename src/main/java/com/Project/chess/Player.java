@@ -1,17 +1,25 @@
 package com.Project.chess;
 
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
+
 
 public class Player {
 	public Clr color;
+	public Board board;
 	public String name;
 	public int level;
 	public boolean goesFirst;
 	public boolean isTurn;
 	public ArrayList<Piece> TakenPiece;
+	public ArrayList<Pawn> PawnsArray = new ArrayList<>();
+	public int click;
 	
-	public Player(String name, boolean first) {
-		this.name = name;
+	public Player(boolean first,Board board) {
+		this.click =0;
+		this.name = null;
+		this.board = board;
 		goesFirst = first;
 		if (goesFirst) {
 			this.color = Clr.WHITE;
@@ -20,6 +28,24 @@ public class Player {
 		else {
 			this.color = Clr.BLACK;
 			this.isTurn = false;
+		}
+		for (int i =0 ; i<8;i++){
+			Pawn a = new Pawn(this);
+			if (first){
+				a.setCell(this.board.cells[i][6]);
+			}
+			else{
+				a.setCell(this.board.cells[i][1]);
+			}
+			if (this.color == Clr.BLACK	){
+				a.setImageBlack(new ImageView("C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\pawnWhite.png"));
+
+			}
+			else {
+				a.setImageWhite(new ImageView("C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\pawnWhite.png"));
+
+			}
+			this.PawnsArray.add(a);
 		}
 	}
 
@@ -69,6 +95,18 @@ public class Player {
 
 	public void setTakenPiece(ArrayList<Piece> takenPiece) {
 		TakenPiece = takenPiece;
+	}
+	public void moveAnass(int i){
+		System.out.println("am clicked");
+		if (this.click == 0){
+		this.PawnsArray.get(i).getImage().setOnMouseClicked(mouseEvent -> board.cells[0][0].tiles.get("00").setStyle("-fx-background-color: black"));
+		click++;}
+		else{
+			click = 0;
+			this.PawnsArray.get(i).getImage().setOnMouseClicked(mouseEvent -> board.cells[0][0].tiles.get("00").setStyle("-fx-background-color: red"));
+		}
+
+
 	}
 
 }

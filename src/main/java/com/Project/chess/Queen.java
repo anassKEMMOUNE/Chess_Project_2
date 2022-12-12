@@ -8,8 +8,8 @@ public class Queen extends Piece {
 	public ArrayList<Vector> authorizedMoves;
 	static Type type = Type.QUEEN;
 	
-	public Queen(Cell cell, Player player) {
-		super(cell, player);
+	public Queen( Player player) {
+		super( player);
 
 	}
 	
