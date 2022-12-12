@@ -11,6 +11,7 @@ public class Cell {
 	public Clr color;
 	public Board board ;
 	public Label tile = new Label();
+	public boolean clicked;
 	HashMap<String,Label> tiles = new HashMap<>();
 
 
@@ -21,6 +22,7 @@ public class Cell {
 		emplacment[1] = coordY;
 		this.color = null;
 		this.board = null;
+		this.clicked = false;
 	}
 
 	public Piece getPiece() {
@@ -56,6 +58,12 @@ public class Cell {
 
 	}
 
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
+	}
+	public boolean getClicked(){
+		return this.clicked;
+	}
 
 	public boolean isEmpty(){
 		if(this.getPiece() == null) {

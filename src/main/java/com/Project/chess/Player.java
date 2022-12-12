@@ -97,16 +97,13 @@ public class Player {
 		TakenPiece = takenPiece;
 	}
 	public void moveAnass(int i){
-		System.out.println("am clicked");
-		if (this.click == 0){
-		this.PawnsArray.get(i).getImage().setOnMouseClicked(mouseEvent -> board.cells[0][0].tiles.get("00").setStyle("-fx-background-color: black"));
-		click++;}
-		else{
-			click = 0;
-			this.PawnsArray.get(i).getImage().setOnMouseClicked(mouseEvent -> board.cells[0][0].tiles.get("00").setStyle("-fx-background-color: red"));
+
+
+
+
 		}
 
 
 	}
 
-}
+

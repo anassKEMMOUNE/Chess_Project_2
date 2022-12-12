@@ -68,17 +68,17 @@ public class Pawn extends Piece{
 		}
 	}
 
-	/*public boolean transformToQueen(){
+	public boolean transformToQueen(){
 		if(this.getCell().getEmplacment()[1] == 8 ||  this.getCell().getEmplacment()[1] == -8 ) {
-			Queen queen = new Queen(this.getCell(), this.getPlayer());
+			Queen queen = new Queen(this.getPlayer());
 			this.getCell().setPiece(null);
 			this.getCell().setPiece(queen);
 			return true;
 		}
 		return false;
-	}*/
+	}
 
-	/*public boolean makeMove(Cell finalCell){
+	public boolean makeMove(Cell finalCell){
 		if(validNormalMove(finalCell))
 		{
 			finalCell.setPiece(this);
@@ -91,7 +91,7 @@ public class Pawn extends Piece{
 		}
 		return this.transformToQueen();
 
-	}*/
+	}
 }
 
 

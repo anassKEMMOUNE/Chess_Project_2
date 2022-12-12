@@ -13,7 +13,7 @@ public class Board {
     public Board(){
         for(int row =0;row<8;row++){
             for (int col = 0;col<8;col++){
-                cells[row][col]= new Cell(row,col);
+                cells[row][col]= new Cell(8-row,8-col);
                 cells[row][col].setTile(new Label());
                 cells[row][col].getTile().setPrefSize(TILE_SIZE,TILE_SIZE);
                 if ((row + col) % 2 == 0) {

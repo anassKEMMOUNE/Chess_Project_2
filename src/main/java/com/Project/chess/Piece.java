@@ -10,7 +10,7 @@ public abstract class Piece {
 	public ImageView imageWhite;
 	public ImageView imageBlack;
 
-	
+	public boolean clicked;
 	
 	public Piece( Player player){
 		this.cell = null;
@@ -18,6 +18,7 @@ public abstract class Piece {
 		this.isInGame = true;
 		this.imageWhite = null;
 		this.imageBlack = null;
+		this.clicked = false;
 	}
 	
 	public Cell getCell() {
@@ -75,8 +76,12 @@ public abstract class Piece {
 	public void setImageBlack(ImageView value) {
 		this.imageBlack = value;
 	}
-	public void getClickStatus(){
-		System.out.println(this.getImage().getOnMouseClicked());
+
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
+	}
+	public boolean getClicked(){
+		return this.clicked;
 	}
 	public void attackPiece(Cell finalCell) {
 	}
