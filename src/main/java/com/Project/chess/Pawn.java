@@ -97,7 +97,6 @@ public class Pawn extends Piece {
 			this.setClicked(true);
 			ChessInterface.setCounter(1);
 			ChessInterface.setSelected(a);
-			System.out.println(a);
 		}
 	}
 

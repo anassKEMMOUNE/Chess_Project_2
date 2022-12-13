@@ -177,4 +177,5 @@ public class Cell {
 		}
 		return verticalVectors;
 	}
+
 }
