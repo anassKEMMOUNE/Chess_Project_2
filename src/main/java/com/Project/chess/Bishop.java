@@ -7,8 +7,8 @@ public class Bishop extends Piece {
 	public ArrayList<Vector> authorizedMoves ;
 	static Type type = Type.BISHOP;
 	
-	public Bishop(Cell cell, Player player) {
-		super(cell, player);
+	public Bishop( Player player) {
+		super( player);
 	}
 
 

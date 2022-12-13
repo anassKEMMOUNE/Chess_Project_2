@@ -7,8 +7,8 @@ public class Knight extends Piece {
 	final ArrayList<Vector> authorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(1,2), new Vector(2,1), new Vector(1,-2), new Vector(2,-1), new Vector(-2, 1), new Vector(-1,2), new Vector(-2,-1), new Vector(-1,-2)));
 	static Type type = Type.KNIGHT;
 
-	public Knight(Cell cell, Player player) {
-		super(cell, player);
+	public Knight( Player player) {
+		super( player);
 	}
 	public boolean validMove(Cell finalCell){
 		Cell initialCell = this.getCell();
