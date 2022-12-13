@@ -86,6 +86,14 @@ public abstract class Piece {
 	public boolean getClicked(){
 		return this.clicked;
 	}
+	public void clickEvent(int a) {
+		if (!this.getClicked() && ChessInterface.getCounter() == 0) {
+			this.setClicked(true);
+			ChessInterface.setCounter(1);
+			ChessInterface.setSelected(a);
+			//this.getCell().getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
+		}
+	}
 	public void attackPiece(Cell finalCell) {
 	}
 	public boolean makeMove(Cell finalCell) {

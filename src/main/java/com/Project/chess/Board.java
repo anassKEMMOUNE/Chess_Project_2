@@ -7,25 +7,29 @@ public class Board {
     private static final int TILE_SIZE = 64;
     public Cell[][] cells=new Cell[8][8];
     public GridPane grid = new GridPane();
-    Player player1 = new Player( true,this);
-    Player player2 = new Player( false,this);
+    public Player player1  ;
+    Player player2 ;
 
     public Board(){
         for(int row =0;row<8;row++){
             for (int col = 0;col<8;col++){
-                cells[row][col]= new Cell(8-row,8-col);
-                cells[row][col].setTile(new Label());
-                cells[row][col].getTile().setPrefSize(TILE_SIZE,TILE_SIZE);
-                if ((row + col) % 2 == 0) {
-                    cells[row][col].getTile().setStyle("-fx-background-color: #ffe9c5");
+                cells[col][row]= new Cell(col,row);
+                cells[col][row].setTile(new Label());
+                cells[col][row].setBoard(this);
+                cells[col][row].getTile().setPrefSize(TILE_SIZE,TILE_SIZE);
+                if ((col + row) % 2 == 0) {
+                    cells[col][row].getTile().setStyle("-fx-background-color: #ffe9c5");
+                    cells[col][row].setColor(Clr.WHITE);
                 } else {
-                    cells[row][col].getTile().setStyle("-fx-background-color: #8d816d");
+                    cells[col][row].getTile().setStyle("-fx-background-color: #8d816d");
+                    cells[col][row].setColor(Clr.BLACK);
                 }
-                grid.add(cells[row][col].getTile(), col, row);
+                grid.add(cells[col][row].getTile(), col, row);
 
             }
         }
-
+        player1 = new Player(true,this);
+        player2 = new Player(false,this);
         player1.setColor(Clr.WHITE);
         player2.setColor(Clr.BLACK);
         for ( int i =0;i<8;i++){

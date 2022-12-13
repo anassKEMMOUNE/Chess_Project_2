@@ -7,7 +7,9 @@ import java.util.HashMap;
 
 public class Cell {
 	public Piece piece;
-	public int[] emplacment = new int[2];
+	public  static final String whiteColor = "#ffe9c5";
+	public static final String  blackColor = "#8d816d";
+	public int[] emplacement = new int[2];
 	public Clr color;
 	public Board board ;
 	public Label tile = new Label();
@@ -18,8 +20,8 @@ public class Cell {
 
 	public Cell(int coordX, int coordY) {
 		piece = null;
-		emplacment[0] = coordX;
-		emplacment[1] = coordY;
+		emplacement[0] = coordX;
+		emplacement[1] = coordY;
 		this.color = null;
 		this.board = null;
 		this.clicked = false;
@@ -33,12 +35,12 @@ public class Cell {
 		this.piece = piece;
 	}
 
-	public int[] getEmplacment() {
-		return emplacment;
+	public int[] getEmplacement() {
+		return emplacement;
 	}
 
-	public void setEmplacment(int[] emplacment) {
-		this.emplacment = emplacment;
+	public void setEmplacement(int[] emplacement) {
+		this.emplacement = emplacement;
 	}
 
 	public Clr getColor() {
@@ -48,13 +50,22 @@ public class Cell {
 	public void setColor(Clr color) {
 		this.color = color;
 	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
 	public Label getTile() {
 		return this.tile;
 	}
 
 	public void setTile(Label value) {
 		this.tile = value;
-		tiles.put(String.valueOf(emplacment[0]).concat(String.valueOf(emplacment[1])),this.tile);
+		tiles.put(String.valueOf(emplacement[0]).concat(String.valueOf(emplacement[1])),this.tile);
 
 	}
 
@@ -74,9 +85,9 @@ public class Cell {
 
 	}
 	public Cell add(Vector vector){
-		int x = this.getEmplacment()[0];
-		int y = this.getEmplacment()[1];
-		if(x+vector.getDirectionX()>8 || x+vector.getDirectionX()<0 || y+vector.getDirectionY()>8 || y+vector.getDirectionY()<0){
+		int x = this.getEmplacement()[0];
+		int y = this.getEmplacement()[1];
+		if(x+vector.getDirectionX()>7 || x+vector.getDirectionX()<0 || y+vector.getDirectionY()>7 || y+vector.getDirectionY()<0){
 			return this;
 		}
 		return board.getCell(x+vector.getDirectionX(), y+vector.getDirectionY() );
@@ -92,9 +103,9 @@ public class Cell {
 
 	public ArrayList<Vector> getDiagonal(){
 		ArrayList<Vector> diagonalVectors = new ArrayList<Vector>();
-		int currentX = this.getEmplacment()[0];
-		int currentY = this.getEmplacment()[1];
-		while(currentX < 8 && currentY < 8 ){
+		int currentX = this.getEmplacement()[0];
+		int currentY = this.getEmplacement()[1];
+		while(currentX < 7 && currentY < 7 ){
 			diagonalVectors.add(new Vector(currentX +1, currentY+1));
 			if(!board.getCell(currentX +1,currentY+1 ).isEmpty()){
 				break;
@@ -103,8 +114,8 @@ public class Cell {
 			currentY++;
 
 		}
-		currentX = this.getEmplacment()[0];
-		currentY = this.getEmplacment()[1];
+		currentX = this.getEmplacement()[0];
+		currentY = this.getEmplacement()[1];
 		while(currentX>0 && currentY>0){
 			diagonalVectors.add(new Vector(currentX -1, currentY-1));
 			if(!board.getCell(currentX - 1,currentY - 1 ).isEmpty()){
@@ -113,9 +124,9 @@ public class Cell {
 			currentX--;
 			currentY--;
 		}
-		currentX = this.getEmplacment()[0];
-		currentY = this.getEmplacment()[1];
-		while(currentX < 8 && currentY>0){
+		currentX = this.getEmplacement()[0];
+		currentY = this.getEmplacement()[1];
+		while(currentX < 7 && currentY>0){
 			diagonalVectors.add(new Vector(currentX +1, currentY-1));
 			if(!board.getCell(currentX +1,currentY-1 ).isEmpty()){
 				break;
@@ -123,9 +134,9 @@ public class Cell {
 			currentX++;
 			currentY--;
 		}
-		currentX = this.getEmplacment()[0];
-		currentY = this.getEmplacment()[1];
-		while(currentX>0 && currentY<8){
+		currentX = this.getEmplacement()[0];
+		currentY = this.getEmplacement()[1];
+		while(currentX>0 && currentY<7){
 			diagonalVectors.add(new Vector(currentX -1, currentY+1));
 			if(!board.getCell(currentX -1,currentY+1 ).isEmpty()){
 				break;
@@ -139,17 +150,17 @@ public class Cell {
 
 	public ArrayList<Vector> getVertical(){
 		ArrayList<Vector> verticalVectors = new ArrayList<Vector>();
-		int currentX = this.getEmplacment()[0];
-		int currentY = this.getEmplacment()[1];
-		while(currentX<8){
+		int currentX = this.getEmplacement()[0];
+		int currentY = this.getEmplacement()[1];
+		while(currentX<7){
 			verticalVectors.add(new Vector(currentX +1, currentY));
 			if(!board.getCell(currentX+1,currentY).isEmpty()){
 				break;
 			}
 			currentX++;
 		}
-		currentX = this.getEmplacment()[0];
-		currentY = this.getEmplacment()[1];
+		currentX = this.getEmplacement()[0];
+		currentY = this.getEmplacement()[1];
 		while(currentX > 0){
 			verticalVectors.add(new Vector(currentX -1, currentY));
 			if(!board.getCell(currentX-1,currentY).isEmpty()){
@@ -157,8 +168,8 @@ public class Cell {
 			}
 			currentX--;
 		}
-		currentX = this.getEmplacment()[0];
-		currentY = this.getEmplacment()[1];
+		currentX = this.getEmplacement()[0];
+		currentY = this.getEmplacement()[1];
 		while(currentY>0){
 			verticalVectors.add(new Vector(currentX, currentY-1));
 			if(!board.getCell(currentX,currentY-1).isEmpty()){
@@ -166,9 +177,9 @@ public class Cell {
 			}
 			currentY--;
 		}
-		currentX = this.getEmplacment()[0];
-		currentY = this.getEmplacment()[1];
-		while(currentY<8){
+		currentX = this.getEmplacement()[0];
+		currentY = this.getEmplacement()[1];
+		while(currentY<7){
 			verticalVectors.add(new Vector(currentX, currentY+1));
 			if(!board.getCell(currentX,currentY+1).isEmpty()){
 				break;
@@ -177,5 +188,7 @@ public class Cell {
 		}
 		return verticalVectors;
 	}
+	public void clickEvent(){
 
+	}
 }

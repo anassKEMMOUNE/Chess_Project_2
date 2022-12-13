@@ -37,11 +37,12 @@ public class Bishop extends Piece {
 	}
 
 	public boolean validMove(Cell finalCell){
+		this.calcMoves();
 		Cell initialCell = this.getCell();
-		int directionX = finalCell.getEmplacment()[0]-initialCell.getEmplacment()[0];
-		int directionY = finalCell.getEmplacment()[1]-initialCell.getEmplacment()[1];
+		int directionX = finalCell.getEmplacement()[0]-initialCell.getEmplacement()[0];
+		int directionY = finalCell.getEmplacement()[1]-initialCell.getEmplacement()[1];
 		Vector moveVector = new Vector(directionX, directionY);
-		if(finalCell.getEmplacment()[0]> 8 || finalCell.getEmplacment()[1]> 8 || finalCell.getEmplacment()[0] < 0){
+		if(finalCell.getEmplacement()[0]> 8 || finalCell.getEmplacement()[1]> 8 || finalCell.getEmplacement()[0] < 0){
 			return false;
 		}
 		else{
@@ -79,14 +80,7 @@ public class Bishop extends Piece {
 		return false;
 
 	}
-	public void clickEvent(int a) {
-		if (!this.getClicked() && ChessInterface.getCounter() == 0) {
-			this.setClicked(true);
-			ChessInterface.setCounter(1);
-			ChessInterface.setSelected(a);
-			System.out.println(a);
-		}
-	}
+
 
 
 }

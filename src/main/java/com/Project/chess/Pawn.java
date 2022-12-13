@@ -1,6 +1,7 @@
 package com.Project.chess;
 
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,14 +25,17 @@ public class Pawn extends Piece {
 
 	}
 
+	public boolean ValidMove(Cell finalCell){
+		return (validAttack(finalCell)||validNormalMove(finalCell));
+	}
 	public boolean validAttack(Cell finalCell) {
-		if (finalCell.getEmplacment()[0] > 8 || finalCell.getEmplacment()[1] > 8 || finalCell.isEmpty() || this.getColor() == finalCell.getPiece().getColor()) {
+		if (finalCell.getEmplacement()[0] > 7 || finalCell.getEmplacement()[1] > 7 || finalCell.isEmpty() || this.getColor() == finalCell.getPiece().getColor()) {
 			return false;
 		} else {
 			Clr color = this.getColor();
 			Cell initialCell = this.getCell();
-			int directionX = finalCell.getEmplacment()[0] - initialCell.getEmplacment()[0];
-			int directionY = finalCell.getEmplacment()[1] - initialCell.getEmplacment()[1];
+			int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
+			int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
 			Vector moveVector = new Vector(directionX, directionY);
 
 			if (color == Clr.WHITE) {
@@ -44,10 +48,10 @@ public class Pawn extends Piece {
 
 	public boolean validNormalMove(Cell finalCell) {
 		Cell initialCell = this.getCell();
-		int directionX = finalCell.getEmplacment()[0] - initialCell.getEmplacment()[0];
-		int directionY = finalCell.getEmplacment()[1] - initialCell.getEmplacment()[1];
+		int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
+		int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
 		Vector moveVector = new Vector(directionX, directionY);
-		if (finalCell.getEmplacment()[0] > 8 || finalCell.getEmplacment()[1] > 8 || finalCell.getEmplacment()[0] < 0 || !finalCell.isEmpty()) {
+		if (finalCell.getEmplacement()[0] > 7 || finalCell.getEmplacement()[1] > 7 || finalCell.getEmplacement()[0] < 0 || !finalCell.isEmpty()) {
 			return false;
 		} else {
 			if (this.player.color == Clr.WHITE) {
@@ -70,11 +74,19 @@ public class Pawn extends Piece {
 	}
 
 	public boolean transformToQueen() {
-		if (this.getCell().getEmplacment()[1] == 8 || this.getCell().getEmplacment()[1] == -8) {
+		if(this.getColor()==Clr.BLACK && this.getCell().getEmplacement()[1] == 7){
+				Queen queen = new Queen(this.getPlayer());
+				this.getCell().setPiece(null);
+				this.getCell().setPiece(queen);
+				return true;
+
+		}
+		if(this.getColor()==Clr.WHITE && this.getCell().getEmplacement()[1] == -7){
 			Queen queen = new Queen(this.getPlayer());
 			this.getCell().setPiece(null);
 			this.getCell().setPiece(queen);
 			return true;
+
 		}
 		return false;
 	}
@@ -91,14 +103,9 @@ public class Pawn extends Piece {
 		return this.transformToQueen();
 
 	}
+public static void main(String[] args){
 
-	public void clickEvent(int a) {
-		if (!this.getClicked() && ChessInterface.getCounter() == 0) {
-			this.setClicked(true);
-			ChessInterface.setCounter(1);
-			ChessInterface.setSelected(a);
-		}
+
 	}
 
 }
-
