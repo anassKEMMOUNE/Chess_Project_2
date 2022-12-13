@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class ChessInterface extends Application {
     private static final int TILE_SIZE = 64;
     private static final int WIDTH = 8;
     private static final int HEIGHT = 8;
-     public int counter = 0;
-    public int selected;
+     public static int counter = 0;
+    public static int selected;
 
     public void start(Stage primaryStage) {
 
@@ -33,12 +34,13 @@ public class ChessInterface extends Application {
             int a = i;
             board.player1.PawnsArray.get(i).getImage().setOnMouseClicked(mouseEvent -> {
 
-                if (!board.player1.PawnsArray.get(a).getClicked() && this.getCounter()==0){
+/*                if (!board.player1.PawnsArray.get(a).getClicked() && this.getCounter()==0){
                     board.player1.PawnsArray.get(a).setClicked(true);
                     this.setCounter(1);
                     this.setSelected(a);
                     System.out.println(a);
-                }
+                }*/
+                board.player1.PawnsArray.get(a).clickEvent(a);
             });
 
         }
@@ -73,20 +75,20 @@ public class ChessInterface extends Application {
 
     }
 
-    public int getCounter() {
+    public static int getCounter() {
         return counter;
     }
 
-    public void setCounter(int counter) {
-        this.counter = counter;
+    public static void setCounter(int counter) {
+        ChessInterface.counter = counter;
     }
 
-    public int getSelected() {
+    public static int getSelected() {
         return selected;
     }
 
-    public void setSelected(int selected) {
-        this.selected = selected;
+    public static void setSelected(int selected) {
+        ChessInterface.selected = selected;
     }
 
     public static void main(String[] args) {

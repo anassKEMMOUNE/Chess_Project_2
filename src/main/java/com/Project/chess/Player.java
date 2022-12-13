@@ -14,6 +14,11 @@ public class Player {
 	public boolean isTurn;
 	public ArrayList<Piece> TakenPiece;
 	public ArrayList<Pawn> PawnsArray = new ArrayList<>();
+	public ArrayList<Rook> RooksArray = new ArrayList<>();
+	public ArrayList<Bishop> BishopsArray = new ArrayList<>();
+	public ArrayList<Knight> KnightsArray = new ArrayList<>();
+	public King king = new King(this);
+	public Queen queen = new Queen(this);
 	public int click;
 	
 	public Player(boolean first,Board board) {
@@ -33,20 +38,69 @@ public class Player {
 			Pawn a = new Pawn(this);
 			if (first){
 				a.setCell(this.board.cells[i][6]);
+
 			}
 			else{
 				a.setCell(this.board.cells[i][1]);
-			}
-			if (this.color == Clr.BLACK	){
-				a.setImageBlack(new ImageView("C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\pawnWhite.png"));
 
 			}
-			else {
-				a.setImageWhite(new ImageView("C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\pawnWhite.png"));
 
-			}
 			this.PawnsArray.add(a);
+
+
 		}
+
+		Bishop bishop1 = new Bishop(this);
+		Bishop bishop2 = new Bishop(this);
+		Rook rook1 = new Rook(this);
+		Rook rook2 = new Rook(this);
+		Knight knight1 = new Knight(this);
+		Knight knight2 = new Knight(this);
+		if (first){
+			bishop1.setCell(this.board.cells[2][7]);
+			bishop2.setCell(this.board.cells[5][7]);
+			rook1.setCell(this.board.cells[0][7]);
+			rook2.setCell(this.board.cells[7][7]);
+			knight1.setCell(this.board.cells[1][7]);
+			knight2.setCell(this.board.cells[6][7]);
+			king.setCell(this.board.cells[4][7]);
+			queen.setCell(this.board.cells[3][7]);
+
+
+		}
+		else{
+			bishop1.setCell(this.board.cells[2][0]);
+			bishop2.setCell(this.board.cells[5][0]);
+			rook1.setCell(this.board.cells[0][0]);
+			rook2.setCell(this.board.cells[7][0]);
+			knight1.setCell(this.board.cells[1][0]);
+			knight2.setCell(this.board.cells[6][0]);
+			king.setCell(this.board.cells[4][0]);
+			queen.setCell(this.board.cells[3][0]);
+
+		}
+		BishopsArray.add(bishop1);
+		BishopsArray.add(bishop2);
+		RooksArray.add(rook1);
+		RooksArray.add(rook2);
+		KnightsArray.add(knight1);
+		KnightsArray.add(knight2);
+
+
+		if (first){
+			bishop1.setCell(this.board.cells[2][7]);
+			bishop2.setCell(this.board.cells[5][7]);
+
+
+
+		}
+		else{
+			bishop1.setCell(this.board.cells[2][0]);
+			bishop2.setCell(this.board.cells[5][0]);
+
+		}
+		BishopsArray.add(bishop1);
+		BishopsArray.add(bishop2);
 	}
 
 	public Clr getColor() {

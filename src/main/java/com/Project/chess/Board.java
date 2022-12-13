@@ -30,8 +30,29 @@ public class Board {
         player2.setColor(Clr.BLACK);
         for ( int i =0;i<8;i++){
             grid.add(player1.PawnsArray.get(i).getImage(),i,6);
+            grid.add(player2.PawnsArray.get(i).getImage(),i,1);
 
         }
+        grid.add(player1.BishopsArray.get(0).getImage(),2,7);
+        grid.add(player1.BishopsArray.get(1).getImage(),5,7);
+        grid.add(player2.BishopsArray.get(0).getImage(),2,0);
+        grid.add(player2.BishopsArray.get(1).getImage(),5,0);
+        grid.add(player1.RooksArray.get(0).getImage(),0,7);
+        grid.add(player1.RooksArray.get(1).getImage(),7,7);
+        grid.add(player2.RooksArray.get(0).getImage(),0,0);
+        grid.add(player2.RooksArray.get(1).getImage(),7,0);
+        grid.add(player1.KnightsArray.get(0).getImage(),1,7);
+        grid.add(player1.KnightsArray.get(1).getImage(),6,7);
+        grid.add(player2.KnightsArray.get(0).getImage(),1,0);
+        grid.add(player2.KnightsArray.get(1).getImage(),6,0);
+        grid.add(player1.king.getImage(),4,7);
+        grid.add(player1.queen.getImage(),3,7);
+        grid.add(player2.king.getImage(),4,0);
+        grid.add(player2.queen.getImage(),3,0);
+
+
+
+
 
     }
 

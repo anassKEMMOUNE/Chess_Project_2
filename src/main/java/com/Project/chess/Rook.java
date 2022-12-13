@@ -1,5 +1,7 @@
 package com.Project.chess;
 
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 
 public class Rook extends Piece {
@@ -8,6 +10,9 @@ public class Rook extends Piece {
 	
 	public Rook( Player player) {
 		super( player);
+		this.name = "rook";
+		this.imageWhite = new ImageView(this.initialPath.concat(this.name).concat("White.png"));
+		this.imageBlack = new ImageView(this.initialPath.concat(this.name).concat("Black.png"));
 	}
 
 	
@@ -69,5 +74,14 @@ public class Rook extends Piece {
 		}
 		return false;
 	}
+	public void clickEvent(int a) {
+		if (!this.getClicked() && ChessInterface.getCounter() == 0) {
+			this.setClicked(true);
+			ChessInterface.setCounter(1);
+			ChessInterface.setSelected(a);
+			System.out.println(a);
+		}
+	}
+
 
 }
