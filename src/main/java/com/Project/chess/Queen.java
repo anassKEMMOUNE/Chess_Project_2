@@ -47,8 +47,8 @@ public class Queen extends Piece {
 
 		
 	}
-
-	public boolean validMove(Cell finalCell){
+	@Override
+	public boolean ValidMove(Cell finalCell){
 		this.calcMoves();
 		Cell initialCell = this.getCell();
 		int directionX = finalCell.getEmplacement()[0]-initialCell.getEmplacement()[0];
@@ -70,7 +70,7 @@ public class Queen extends Piece {
 		if(finalCell.isEmpty()){
 			return;
 		}
-		if(validMove(finalCell)){
+		if(ValidMove(finalCell)){
 			Piece takenPiece = finalCell.replacePiece(this);
 			takenPiece.setInGame(false);
 			this.getPlayer().getTakenPiece().add(takenPiece);
@@ -79,7 +79,7 @@ public class Queen extends Piece {
 
 	@Override
 	public boolean makeMove(Cell finalCell){
-		if (validMove(finalCell)){
+		if (ValidMove(finalCell)){
 			if(finalCell.isEmpty()){
 				finalCell.setPiece(this);
 				this.getCell().setPiece(null);
