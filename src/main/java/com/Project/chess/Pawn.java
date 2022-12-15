@@ -24,24 +24,26 @@ public class Pawn extends Piece {
 		this.imageBlack = new ImageView(this.initialPath.concat(this.name).concat("Black.png"));
 
 	}
-
+	@Override
 	public boolean ValidMove(Cell finalCell){
 		return (validAttack(finalCell)||validNormalMove(finalCell));
 	}
 	public boolean validAttack(Cell finalCell) {
-		if (finalCell.getEmplacement()[0] > 7 || finalCell.getEmplacement()[1] > 7 || finalCell.isEmpty() || this.getColor() == finalCell.getPiece().getColor()) {
+		if (finalCell.isEmpty() || this.getColor() == finalCell.getPiece().getColor()) {
 			return false;
 		} else {
 			Clr color = this.getColor();
 			Cell initialCell = this.getCell();
 			int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
-			int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
+			int directionY = -finalCell.getEmplacement()[1] + initialCell.getEmplacement()[1];
 			Vector moveVector = new Vector(directionX, directionY);
 
 			if (color == Clr.WHITE) {
-				return whiteAttackMoves.contains(moveVector);
+				//return whiteAttackMoves.contains(moveVector);
+				return moveVector.isIn(whiteAttackMoves);
 			} else {
-				return blackAttackMoves.contains(moveVector);
+				//return blackAttackMoves.contains(moveVector);
+				return moveVector.isIn(blackAttackMoves);
 			}
 		}
 	}
@@ -49,20 +51,22 @@ public class Pawn extends Piece {
 	public boolean validNormalMove(Cell finalCell) {
 		Cell initialCell = this.getCell();
 		int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
-		int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
+		int directionY = -finalCell.getEmplacement()[1] + initialCell.getEmplacement()[1];
 		Vector moveVector = new Vector(directionX, directionY);
-		if (finalCell.getEmplacement()[0] > 7 || finalCell.getEmplacement()[1] > 7 || finalCell.getEmplacement()[0] < 0 || !finalCell.isEmpty()) {
-			return false;
-		} else {
-			if (this.player.color == Clr.WHITE) {
-				return whiteAuthorizedMoves.contains(moveVector);
-			} else {
 
-				return blackAuthorizedMoves.contains(moveVector);
+			if (this.player.color == Clr.WHITE) {
+				//return whiteAuthorizedMoves.contains(moveVector);
+				return moveVector.isIn(whiteAuthorizedMoves);
+
+				}
+			else {
+
+				//return blackAuthorizedMoves.contains(moveVector);
+				return moveVector.isIn(blackAuthorizedMoves);
 			}
 
 		}
-	}
+	//}
 
 	@Override
 	public void attackPiece(Cell finalCell) {

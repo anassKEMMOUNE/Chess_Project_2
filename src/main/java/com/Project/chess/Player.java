@@ -36,10 +36,7 @@ public class Player {
 			Pawn a = new Pawn(this);
 			if (first){
 				a.setCell(this.board.cells[i][6]);
-				System.out.println("--------------------------------");
-				System.out.println(a.getCell().emplacement[0]);
-				System.out.println(a.getCell().emplacement[1]);
-				System.out.println("--------------------------------");
+
 
 			}
 			else{

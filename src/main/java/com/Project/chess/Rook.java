@@ -42,7 +42,8 @@ public class Rook extends Piece {
 			return false;
 		}
 		else{
-			return authorizedMoves.contains(moveVector);
+			//return authorizedMoves.contains(moveVector);
+			return moveVector.isIn(authorizedMoves);
 		}
 	}
 	@Override

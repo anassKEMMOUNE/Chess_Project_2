@@ -23,8 +23,12 @@ public class Knight extends Piece {
 		if(finalCell.getEmplacement()[0]> 7 || finalCell.getEmplacement()[1]> 7 || finalCell.getEmplacement()[0] < 0){
 			return false;
 		}
+		if(!finalCell.isEmpty() && finalCell.getPiece().getColor() == this.getColor()){
+			return false;
+		}
 		else{
-			return authorizedMoves.contains(moveVector);
+			//return authorizedMoves.contains(moveVector);
+			return moveVector.isIn(authorizedMoves);
 		}
 	}
 	@Override

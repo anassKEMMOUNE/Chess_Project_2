@@ -188,7 +188,21 @@ public class Cell {
 		}
 		return verticalVectors;
 	}
-	public void clickEvent(){
+	public void clickEvent(int c ,int b){
+		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b]) ){
+			board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
+			board.grid.add(ChessInterface.getSelectedPiece().getImage(),c,b);
+			if (ChessInterface.getSelectedPiece().getCell().getColor() == Clr.WHITE){
+				ChessInterface.getSelectedPiece().getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
+			}
+			else {
+				ChessInterface.getSelectedPiece().getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
+			}
+			ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
+			ChessInterface.getSelectedPiece().setClicked(false);
+			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
 
+
+		}
 	}
 }

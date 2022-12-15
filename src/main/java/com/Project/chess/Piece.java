@@ -17,11 +17,14 @@ public abstract class Piece {
 		this.cell = null;
 		this.player = player;
 		this.name = "";
-		this.initialPath = "C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\";
+		this.initialPath = "/";
 		this.isInGame = true;
 		this.imageWhite = null;
 		this.imageBlack = null;
 		this.clicked = false;
+	}
+	public boolean ValidMove(Cell finalCell){
+		return true;
 	}
 	
 	public Cell getCell() {
@@ -87,12 +90,23 @@ public abstract class Piece {
 		return this.clicked;
 	}
 	public void clickEvent(int a) {
-		if (!this.getClicked() && ChessInterface.getCounter() == 0) {
+		if (!this.getClicked() ) {
 			this.setClicked(true);
-			ChessInterface.setCounter(1);
 			ChessInterface.setSelected(a);
-			//this.getCell().getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
+			ChessInterface.setSelectedPiece(this);
+			ChessInterface.oldSelectedPieces.add(this);
+			this.getCell().getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
 		}
+	for ( int i = 0 ; i< ChessInterface.oldSelectedPieces.size()-1;i++){
+		ChessInterface.oldSelectedPieces.get(i).setClicked(false);
+		if (ChessInterface.oldSelectedPieces.get(i).getCell().getColor() == Clr.WHITE){
+			ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
+		}
+		else {
+			ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
+		}
+	}
+
 	}
 	public void attackPiece(Cell finalCell) {
 	}

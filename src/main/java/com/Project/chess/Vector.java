@@ -1,5 +1,8 @@
 package com.Project.chess;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Vector {
 	public int directionX;
 	public int directionY;
@@ -23,6 +26,15 @@ public class Vector {
 
 	public void setDirectionY(int directionY) {
 		this.directionY = directionY;
+	}
+
+	public boolean isIn(ArrayList<Vector> list){
+		for (Vector vector : list){
+			if(vector.getDirectionY() == this.getDirectionY() && vector.getDirectionX()==this.getDirectionX()){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
