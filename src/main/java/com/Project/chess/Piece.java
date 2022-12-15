@@ -10,14 +10,14 @@ public abstract class Piece {
 	public ImageView imageWhite;
 	public ImageView imageBlack;
 	public String name;
-	public String initialPath;
+	public static String initialPath = "C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\images\\";
 	public boolean clicked;
 	
 	public Piece( Player player){
 		this.cell = null;
 		this.player = player;
 		this.name = "";
-		this.initialPath = "/";
+		this.initialPath = "C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\images\\";
 		this.isInGame = true;
 		this.imageWhite = null;
 		this.imageBlack = null;

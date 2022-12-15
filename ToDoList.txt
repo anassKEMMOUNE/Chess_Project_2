@@ -16,5 +16,6 @@ Changing UML to actual code
 
 Useful Notes : 
 black piece : #474540 #000000 #8A7D90 #000000 #000000
+white piece : #F7E1B0 #EDC691 #000000 #ACA6A7 #ACA6A7
 OneDrive/Bureau/'Studies - UM6P'/'2nd year - CPI'/S3/LBD3/'CHess test interface'/Chess_Project_2
 grid.add(image,row,col)
