@@ -198,9 +198,13 @@ public class Cell {
 			else {
 				ChessInterface.getSelectedPiece().getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
 			}
+			//ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
+			ChessInterface.getSelectedPiece().makeMove(board.cells[c][b]);
 			ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
+			System.out.println(ChessInterface.getSelectedPiece().getCell().getEmplacement()[1]);
 			ChessInterface.getSelectedPiece().setClicked(false);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
+
 
 
 		}

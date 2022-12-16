@@ -10,10 +10,10 @@ public class Pawn extends Piece {
 
 
 	static Type type = Type.PAWN;
-	final ArrayList<Vector> whiteAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, 1), new Vector(0, 2)));
-	final ArrayList<Vector> blackAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, -1), new Vector(0, -2)));
-	final ArrayList<Vector> whiteAttackMoves = new ArrayList<Vector>(Arrays.asList(new Vector(1, 1), new Vector(-1, 1)));
-	final ArrayList<Vector> blackAttackMoves = new ArrayList<Vector>(Arrays.asList(new Vector(-1, -1), new Vector(1, -1)));
+	final ArrayList<Vector> whiteAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, -1), new Vector(0, -2)));
+	final ArrayList<Vector> blackAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, 1), new Vector(0, 2)));
+	final ArrayList<Vector> whiteAttackMoves = new ArrayList<Vector>(Arrays.asList(new Vector(1, -1), new Vector(-1, -1)));
+	final ArrayList<Vector> blackAttackMoves   = new ArrayList<Vector>(Arrays.asList(new Vector(-1, -1), new Vector(1, -1)));
 
 
 	public Pawn(Player player) {
@@ -35,7 +35,7 @@ public class Pawn extends Piece {
 			Clr color = this.getColor();
 			Cell initialCell = this.getCell();
 			int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
-			int directionY = -finalCell.getEmplacement()[1] + initialCell.getEmplacement()[1];
+			int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
 			Vector moveVector = new Vector(directionX, directionY);
 
 			if (color == Clr.WHITE) {
@@ -51,22 +51,50 @@ public class Pawn extends Piece {
 	public boolean validNormalMove(Cell finalCell) {
 		Cell initialCell = this.getCell();
 		int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
-		int directionY = -finalCell.getEmplacement()[1] + initialCell.getEmplacement()[1];
+		int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
 		Vector moveVector = new Vector(directionX, directionY);
+		System.out.println(initialCell.getEmplacement()[1]);
+		System.out.println(initialCell.isEmpty());
 
 			if (this.player.color == Clr.WHITE) {
-				//return whiteAuthorizedMoves.contains(moveVector);
-				return moveVector.isIn(whiteAuthorizedMoves);
+				if(moveVector.getDirectionY() == -2 && moveVector.getDirectionX() == 0){
+
+					if(this.getCell().getEmplacement()[1] == 6 ){
+						System.out.println(finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]+1).isEmpty());
+						return finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]+1).isEmpty();//finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]-1).isEmpty()
+					}
+					else{
+						return false;
+					}
+
+				}
+				else{
+					return moveVector.isIn(whiteAuthorizedMoves);
+				}
+
 
 				}
 			else {
+				if(moveVector.getDirectionY() == 2 && moveVector.getDirectionX() == 0){
+					if(this.getCell().getEmplacement()[1] == 1 ){
+ ;
+						return finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]-1).isEmpty();
+
+					}
+					else{
+						return false;
+					}
+
+				}
+				else{
+					return moveVector.isIn(blackAuthorizedMoves);
+				}
 
 				//return blackAuthorizedMoves.contains(moveVector);
-				return moveVector.isIn(blackAuthorizedMoves);
-			}
 
-		}
-	//}
+			}
+	}
+
 
 	@Override
 	public void attackPiece(Cell finalCell) {
