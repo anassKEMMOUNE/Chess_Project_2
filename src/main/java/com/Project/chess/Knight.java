@@ -38,12 +38,12 @@ public class Knight extends Piece {
 			return;
 		}
 		if(ValidMove(finalCell)){
+			this.getCell().setPiece(null);
 			Piece takenPiece = finalCell.replacePiece(this);
 			takenPiece.setInGame(false);
 			this.getPlayer().getTakenPiece().add(takenPiece);
-			finalCell.setPiece(this);
-			this.getCell().setPiece(null);
-			this.setCell(finalCell);
+
+
 		}
 	}
 

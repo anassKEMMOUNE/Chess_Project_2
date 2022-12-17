@@ -97,7 +97,9 @@ public class Cell {
 	public Piece replacePiece(Piece other) {
 		Piece old = this.getPiece();
 		this.setPiece(other);
+		other.setCell(this);
 		old.setInGame(false);
+		old.setCell(null);
 		return old;
 	}
 
@@ -190,7 +192,9 @@ public class Cell {
 	}
 	public void clickEvent(int c ,int b){
 		System.out.println(board.cells[c][b].isEmpty());
-		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b]) /*&& board.cells[c][b].isEmpty() */){
+		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b]) /*&& board.cells[c][b].isEmpty() */) {
+			//if finalcell 3amra{
+		}
 			//ChessInterface.getSelectedPiece().getCell().setPiece(null);
 			//board.cells[c][b].setPiece(ChessInterface.getSelectedPiece());
 			board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
@@ -207,7 +211,6 @@ public class Cell {
 
 			ChessInterface.getSelectedPiece().setClicked(false);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
-
 
 
 		}

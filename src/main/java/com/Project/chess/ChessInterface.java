@@ -179,7 +179,7 @@ public class ChessInterface extends Application {
         btn.setOnMouseClicked(mouseEvent -> stage.setScene(tootScene));
         btn2.setOnMouseClicked(mouseEvent -> {stage.setScene(scene2);
                 board.player1.setName(t1.getText());
-                board.container.add
+                //board.container.add
                 System.out.println(board.player1.getName());
 
                 }
