@@ -53,14 +53,16 @@ public class Pawn extends Piece {
 		int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
 		int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
 		Vector moveVector = new Vector(directionX, directionY);
-		System.out.println(initialCell.getEmplacement()[1]);
-		System.out.println(initialCell.isEmpty());
+
+			if (!finalCell.isEmpty()){
+				return false;
+			}
 
 			if (this.player.color == Clr.WHITE) {
 				if(moveVector.getDirectionY() == -2 && moveVector.getDirectionX() == 0){
 
 					if(this.getCell().getEmplacement()[1] == 6 ){
-						System.out.println(finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]+1).isEmpty());
+
 						return finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]+1).isEmpty();//finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]-1).isEmpty()
 					}
 					else{
@@ -125,8 +127,11 @@ public class Pawn extends Piece {
 
 	public boolean makeMove(Cell finalCell) {
 		if (validNormalMove(finalCell)) {
-			finalCell.setPiece(this);
 			this.getCell().setPiece(null);
+			this.setCell(finalCell);
+			finalCell.setPiece(this);
+
+
 		} else {
 			if (validAttack(finalCell)) {
 				attackPiece(finalCell);

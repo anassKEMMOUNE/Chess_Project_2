@@ -189,7 +189,10 @@ public class Cell {
 		return verticalVectors;
 	}
 	public void clickEvent(int c ,int b){
-		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b]) ){
+		System.out.println(board.cells[c][b].isEmpty());
+		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b]) /*&& board.cells[c][b].isEmpty() */){
+			//ChessInterface.getSelectedPiece().getCell().setPiece(null);
+			//board.cells[c][b].setPiece(ChessInterface.getSelectedPiece());
 			board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
 			board.grid.add(ChessInterface.getSelectedPiece().getImage(),c,b);
 			if (ChessInterface.getSelectedPiece().getCell().getColor() == Clr.WHITE){
@@ -198,10 +201,10 @@ public class Cell {
 			else {
 				ChessInterface.getSelectedPiece().getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
 			}
-			//ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
 			ChessInterface.getSelectedPiece().makeMove(board.cells[c][b]);
-			ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
-			System.out.println(ChessInterface.getSelectedPiece().getCell().getEmplacement()[1]);
+			//ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
+
+
 			ChessInterface.getSelectedPiece().setClicked(false);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
 

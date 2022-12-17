@@ -36,11 +36,13 @@ public class Player {
 			Pawn a = new Pawn(this);
 			if (first){
 				a.setCell(this.board.cells[i][6]);
+				this.board.cells[i][6].setPiece(a);
 
 
 			}
 			else{
 				a.setCell(this.board.cells[i][1]);
+				this.board.cells[i][1].setPiece(a);
 
 			}
 
@@ -64,6 +66,14 @@ public class Player {
 			knight2.setCell(this.board.cells[6][7]);
 			king.setCell(this.board.cells[4][7]);
 			queen.setCell(this.board.cells[3][7]);
+			this.board.cells[2][7].setPiece(bishop1);
+			this.board.cells[5][7].setPiece(bishop2);
+			this.board.cells[0][7].setPiece(rook1);
+			this.board.cells[7][7].setPiece(rook2);
+			this.board.cells[1][7].setPiece(knight1);
+			this.board.cells[6][7].setPiece(knight2);
+			this.board.cells[4][7].setPiece(king);
+			this.board.cells[3][7].setPiece(queen);
 
 
 		}
@@ -76,6 +86,14 @@ public class Player {
 			knight2.setCell(this.board.cells[6][0]);
 			king.setCell(this.board.cells[4][0]);
 			queen.setCell(this.board.cells[3][0]);
+			this.board.cells[2][0].setPiece(bishop1);
+			this.board.cells[5][0].setPiece(bishop2);
+			this.board.cells[0][0].setPiece(rook1);
+			this.board.cells[7][0].setPiece(rook2);
+			this.board.cells[1][0].setPiece(knight1);
+			this.board.cells[6][0].setPiece(knight2);
+			this.board.cells[4][0].setPiece(king);
+			this.board.cells[3][0].setPiece(queen);
 
 		}
 		BishopsArray.add(bishop1);
@@ -86,20 +104,7 @@ public class Player {
 		KnightsArray.add(knight2);
 
 
-		if (first){
-			bishop1.setCell(this.board.cells[2][7]);
-			bishop2.setCell(this.board.cells[5][7]);
 
-
-
-		}
-		else{
-			bishop1.setCell(this.board.cells[2][0]);
-			bishop2.setCell(this.board.cells[5][0]);
-
-		}
-		BishopsArray.add(bishop1);
-		BishopsArray.add(bishop2);
 	}
 
 	public Clr getColor() {

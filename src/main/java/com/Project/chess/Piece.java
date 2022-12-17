@@ -10,7 +10,7 @@ public abstract class Piece {
 	public ImageView imageWhite;
 	public ImageView imageBlack;
 	public String name;
-	public static String initialPath = "C:\\Users\\SAMI.AGOURRAM\\Desktop\\Java Project\\src\\main\\java\\com\\Project\\chess\\images\\";
+	public static String initialPath = "C:\\Users\\anass\\OneDrive\\Bureau\\Studies - UM6P\\2nd year - CPI\\S3\\LBD3\\CHess test interface\\Chess_Project_2\\src\\main\\java\\com\\Project\\chess\\images\\";
 	public boolean clicked;
 	
 	public Piece( Player player){

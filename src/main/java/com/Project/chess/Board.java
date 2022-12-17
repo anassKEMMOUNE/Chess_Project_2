@@ -2,11 +2,13 @@ package com.Project.chess;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class Board {
     private static final int TILE_SIZE = 64;
     public Cell[][] cells=new Cell[8][8];
     public GridPane grid = new GridPane();
+    public Pane container = new Pane();
     public Player player1  ;
     Player player2 ;
 
@@ -17,6 +19,7 @@ public class Board {
                 cells[col][row].setTile(new Label());
                 cells[col][row].setBoard(this);
                 cells[col][row].getTile().setPrefSize(TILE_SIZE,TILE_SIZE);
+
                 if ((col + row) % 2 == 0) {
                     cells[col][row].getTile().setStyle("-fx-background-color: #ffe9c5");
                     cells[col][row].setColor(Clr.WHITE);
@@ -53,7 +56,7 @@ public class Board {
         grid.add(player1.queen.getImage(),3,7);
         grid.add(player2.king.getImage(),4,0);
         grid.add(player2.queen.getImage(),3,0);
-
+        container.getChildren().add(grid);
 
 
 

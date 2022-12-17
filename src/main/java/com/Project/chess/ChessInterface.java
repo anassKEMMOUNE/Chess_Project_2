@@ -1,9 +1,7 @@
 package com.Project.chess;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -74,7 +72,8 @@ public class ChessInterface extends Application {
         Scene tootScene = new Scene(toot,600,600);
         Button btn2 = new Button("Classic");
         Button btn1 = new Button("Quick Game");
-        btn2.setOnMouseEntered(e -> btn2.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)"));
+        btn2.setOnMouseEntered(e -> btn2.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)")
+        );
         btn2.setOnMouseExited(e -> btn2.setStyle("-fx-background-color: #010101; -fx-text-fill: white; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)"));
         btn1.setOnMouseEntered(e -> btn1.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)"));
         btn1.setOnMouseExited(e -> btn1.setStyle("-fx-background-color: #010101; -fx-text-fill: white; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)"));
@@ -83,8 +82,8 @@ public class ChessInterface extends Application {
         Text txt3 = new Text("READY ?");
         TextField t1 = new TextField();
         TextField t2 = new TextField();
-        t1.setStyle("-fx-background-radius:25;-fx-border-radius:25; -fx-border-color: black;-fx-border-width: 3px ");
-        t2.setStyle("-fx-background-radius:25;-fx-border-radius:25; -fx-border-color: black;-fx-border-width: 3px ");
+        t1.setStyle("-fx-background-radius:25;-fx-border-radius:25; -fx-border-color: black;-fx-border-width: 3px ; -fx-font-size: 18; -fx-font-weight: 600");
+        t2.setStyle("-fx-background-radius:25;-fx-border-radius:25; -fx-border-color: black;-fx-border-width: 3px ; -fx-font-size: 18; -fx-font-weight: 600");
         txt.setLayoutX(120);
         txt.setLayoutY(350);
         txt.setStyle("-fx-font-size:29");
@@ -131,6 +130,8 @@ public class ChessInterface extends Application {
         board = new Board();
         GridPane grid = board.grid;
 
+
+
         //board.player1.moveAnass(0);
         for (int i=0;i<8;i++){
             int a = i;
@@ -165,12 +166,25 @@ public class ChessInterface extends Application {
 
 
         //board.getChildren().remove(a);
-        grid.setAlignment(Pos.CENTER);
-        grid.setStyle("-fx-background-color: #5e5956");
-        Scene scene2 = new Scene(grid, 600, 600);
+        grid.setLayoutX(44);
+        grid.setLayoutY(44);
+        board.container.setStyle("-fx-background-color: #5e5956");
+
+
+
+
+
+        Scene scene2 = new Scene(board.container, 600, 600);
 
         btn.setOnMouseClicked(mouseEvent -> stage.setScene(tootScene));
-        btn2.setOnMouseClicked(mouseEvent -> stage.setScene(scene2));
+        btn2.setOnMouseClicked(mouseEvent -> {stage.setScene(scene2);
+                board.player1.setName(t1.getText());
+                board.container.add
+                System.out.println(board.player1.getName());
+
+                }
+        );
+
         stage.setResizable(false);
         stage.setScene(scene1);
         stage.show();

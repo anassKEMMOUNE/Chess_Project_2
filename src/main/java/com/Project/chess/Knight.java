@@ -41,6 +41,9 @@ public class Knight extends Piece {
 			Piece takenPiece = finalCell.replacePiece(this);
 			takenPiece.setInGame(false);
 			this.getPlayer().getTakenPiece().add(takenPiece);
+			finalCell.setPiece(this);
+			this.getCell().setPiece(null);
+			this.setCell(finalCell);
 		}
 	}
 
@@ -50,12 +53,15 @@ public class Knight extends Piece {
 			if(finalCell.isEmpty()){
 				finalCell.setPiece(this);
 				this.getCell().setPiece(null);
+				this.setCell(finalCell);
+
 			}
 			else{
 				if(finalCell.getPiece().getColor() == this.getColor()){ // add type rook to condition
 					return false;
 				}
 				attackPiece(finalCell);
+
 			}
 			return true;
 		}

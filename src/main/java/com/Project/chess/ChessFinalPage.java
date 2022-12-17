@@ -16,8 +16,8 @@ import javafx.scene.text.Text;
 
 public class ChessFinalPage extends Application{
     public void start(Stage stage) throws Exception{
-        Pane toot = new Pane();
-        stage.setScene(new Scene(toot,600,600));
+        Pane froot = new Pane();
+        stage.setScene(new Scene(froot,600,600));
         Text trt = new Text("CONGRATULATION");
         Button bto = new Button();
         Button btoo = new Button();
@@ -42,7 +42,7 @@ public class ChessFinalPage extends Application{
         trt.setFill(Color.YELLOW);
         trt.setStrokeWidth(2);
         trt.setStroke(Color.ORANGE);
-        toot.getChildren().addAll(new ImageView(Piece.initialPath.concat("finale_background.png")),trt,bto,btoo);
+        froot.getChildren().addAll(new ImageView(Piece.initialPath.concat("finale_background.png")),trt,bto,btoo);
         stage.show();
     }
 
