@@ -44,6 +44,7 @@ public class Queen extends Piece {
 				}
 			}
 		}
+		System.out.println(authorizedMoves);
 
 		
 	}
@@ -71,10 +72,12 @@ public class Queen extends Piece {
 			return;
 		}
 		if(ValidMove(finalCell)){
+			this.getCell().setPiece(null);
 			Piece takenPiece = finalCell.replacePiece(this);
 			takenPiece.setInGame(false);
 			this.getPlayer().getTakenPiece().add(takenPiece);
 		}
+
 	}
 
 	@Override
@@ -83,6 +86,7 @@ public class Queen extends Piece {
 			if(finalCell.isEmpty()){
 				finalCell.setPiece(this);
 				this.getCell().setPiece(null);
+				this.setCell(finalCell);
 			}
 			else{
 				if(finalCell.getPiece().getColor() == this.getColor()){ // add type rook to condition

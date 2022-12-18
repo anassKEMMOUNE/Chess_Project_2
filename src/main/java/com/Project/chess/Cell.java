@@ -1,21 +1,21 @@
 package com.Project.chess;
 
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Cell {
 	public Piece piece;
-	public  static final String whiteColor = "#ffe9c5";
-	public static final String  blackColor = "#8d816d";
+	public static final String whiteColor = "#ffe9c5";
+	public static final String blackColor = "#8d816d";
 	public int[] emplacement = new int[2];
 	public Clr color;
-	public Board board ;
+	public Board board;
 	public Label tile = new Label();
 	public boolean clicked;
-	HashMap<String,Label> tiles = new HashMap<>();
-
+	HashMap<String, Label> tiles = new HashMap<>();
 
 
 	public Cell(int coordX, int coordY) {
@@ -65,33 +65,30 @@ public class Cell {
 
 	public void setTile(Label value) {
 		this.tile = value;
-		tiles.put(String.valueOf(emplacement[0]).concat(String.valueOf(emplacement[1])),this.tile);
+		tiles.put(String.valueOf(emplacement[0]).concat(String.valueOf(emplacement[1])), this.tile);
 
 	}
 
 	public void setClicked(boolean clicked) {
 		this.clicked = clicked;
 	}
-	public boolean getClicked(){
+
+	public boolean getClicked() {
 		return this.clicked;
 	}
 
-	public boolean isEmpty(){
-		if(this.getPiece() == null) {
+	public boolean isEmpty() {
+		if (this.getPiece() == null) {
 			return true;
-		}
-		else
+		} else
 			return false;
 
 	}
-	public Cell add(Vector vector){
+
+	public Cell add(Vector vector) {
 		int x = this.getEmplacement()[0];
 		int y = this.getEmplacement()[1];
-		if(x+vector.getDirectionX()>7 || x+vector.getDirectionX()<0 || y+vector.getDirectionY()>7 || y+vector.getDirectionY()<0){
-			return this;
-		}
-		return board.getCell(x+vector.getDirectionX(), y+vector.getDirectionY() );
-
+		return board.getCell(x + vector.getDirectionX(), y + vector.getDirectionY());
 	}
 
 	public Piece replacePiece(Piece other) {
@@ -103,13 +100,13 @@ public class Cell {
 		return old;
 	}
 
-	public ArrayList<Vector> getDiagonal(){
+	public ArrayList<Vector> getDiagonal() {
 		ArrayList<Vector> diagonalVectors = new ArrayList<Vector>();
 		int currentX = this.getEmplacement()[0];
 		int currentY = this.getEmplacement()[1];
-		while(currentX < 7 && currentY < 7 ){
-			diagonalVectors.add(new Vector(currentX +1, currentY+1));
-			if(!board.getCell(currentX +1,currentY+1 ).isEmpty()){
+		while (currentX < 7 && currentY < 7) {
+			diagonalVectors.add(new Vector(currentX + 1 - this.getEmplacement()[0], currentY + 1-this.getEmplacement()[1]));
+			if (!board.getCell(currentX + 1, currentY + 1).isEmpty()) {
 				break;
 			}
 			currentX++;
@@ -118,9 +115,9 @@ public class Cell {
 		}
 		currentX = this.getEmplacement()[0];
 		currentY = this.getEmplacement()[1];
-		while(currentX>0 && currentY>0){
-			diagonalVectors.add(new Vector(currentX -1, currentY-1));
-			if(!board.getCell(currentX - 1,currentY - 1 ).isEmpty()){
+		while (currentX > 0 && currentY > 0) {
+			diagonalVectors.add(new Vector(currentX - 1 - this.getEmplacement()[0], currentY - 1- this.getEmplacement()[1]));
+			if (!board.getCell(currentX - 1, currentY - 1).isEmpty()) {
 				break;
 			}
 			currentX--;
@@ -128,9 +125,9 @@ public class Cell {
 		}
 		currentX = this.getEmplacement()[0];
 		currentY = this.getEmplacement()[1];
-		while(currentX < 7 && currentY>0){
-			diagonalVectors.add(new Vector(currentX +1, currentY-1));
-			if(!board.getCell(currentX +1,currentY-1 ).isEmpty()){
+		while (currentX < 7 && currentY > 0) {
+			diagonalVectors.add(new Vector(currentX + 1 -  this.getEmplacement()[0], currentY - 1- this.getEmplacement()[1]));
+			if (!board.getCell(currentX + 1, currentY - 1).isEmpty()) {
 				break;
 			}
 			currentX++;
@@ -138,9 +135,9 @@ public class Cell {
 		}
 		currentX = this.getEmplacement()[0];
 		currentY = this.getEmplacement()[1];
-		while(currentX>0 && currentY<7){
-			diagonalVectors.add(new Vector(currentX -1, currentY+1));
-			if(!board.getCell(currentX -1,currentY+1 ).isEmpty()){
+		while (currentX > 0 && currentY < 7) {
+			diagonalVectors.add(new Vector(currentX - 1- this.getEmplacement()[0], currentY + 1- this.getEmplacement()[1]));
+			if (!board.getCell(currentX - 1, currentY + 1).isEmpty()) {
 				break;
 			}
 			currentX--;
@@ -150,60 +147,82 @@ public class Cell {
 
 	}
 
-	public ArrayList<Vector> getVertical(){
+	public ArrayList<Vector> getVertical() {
 		ArrayList<Vector> verticalVectors = new ArrayList<Vector>();
 		int currentX = this.getEmplacement()[0];
 		int currentY = this.getEmplacement()[1];
-		while(currentX<7){
-			verticalVectors.add(new Vector(currentX +1, currentY));
-			if(!board.getCell(currentX+1,currentY).isEmpty()){
+		while (currentX < 7) {
+			verticalVectors.add(new Vector(currentX + 1 - this.getEmplacement()[0], 0));
+			if (!board.getCell(currentX + 1, currentY).isEmpty()) {
 				break;
 			}
-			currentX++;
+			else{
+				currentX++;
+			}
 		}
 		currentX = this.getEmplacement()[0];
 		currentY = this.getEmplacement()[1];
-		while(currentX > 0){
-			verticalVectors.add(new Vector(currentX -1, currentY));
-			if(!board.getCell(currentX-1,currentY).isEmpty()){
+		while (currentX > 0) {
+			verticalVectors.add(new Vector(currentX - 1 - this.getEmplacement()[0], 0));
+			if (!board.getCell(currentX - 1, currentY).isEmpty()) {
 				break;
 			}
-			currentX--;
+			else{
+				currentX--;
+			}
+
 		}
 		currentX = this.getEmplacement()[0];
 		currentY = this.getEmplacement()[1];
-		while(currentY>0){
-			verticalVectors.add(new Vector(currentX, currentY-1));
-			if(!board.getCell(currentX,currentY-1).isEmpty()){
+		while (currentY > 0) {
+			verticalVectors.add(new Vector(0, currentY - 1-this.getEmplacement()[1]));
+			if (!board.getCell(currentX, currentY - 1 ).isEmpty()) {
 				break;
 			}
-			currentY--;
+			else{
+				currentY--;
+			}
+
 		}
 		currentX = this.getEmplacement()[0];
 		currentY = this.getEmplacement()[1];
-		while(currentY<7){
-			verticalVectors.add(new Vector(currentX, currentY+1));
-			if(!board.getCell(currentX,currentY+1).isEmpty()){
+		while (currentY < 7) {
+			verticalVectors.add(new Vector(0, currentY + 1 - this.getEmplacement()[1]));
+			if (!board.getCell(currentX, currentY + 1 ).isEmpty()) {
 				break;
 			}
 			currentY++;
 		}
+		System.out.println(verticalVectors);
 		return verticalVectors;
 	}
-	public void clickEvent(int c ,int b){
-		System.out.println(board.cells[c][b].isEmpty());
-		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b]) /*&& board.cells[c][b].isEmpty() */) {
+	public void clickEvent(int c, int b) {
+		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b])) {
 			//if finalcell 3amra{
-		}
 			//ChessInterface.getSelectedPiece().getCell().setPiece(null);
 			//board.cells[c][b].setPiece(ChessInterface.getSelectedPiece());
 			board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
-			board.grid.add(ChessInterface.getSelectedPiece().getImage(),c,b);
-			if (ChessInterface.getSelectedPiece().getCell().getColor() == Clr.WHITE){
+			board.grid.add(ChessInterface.getSelectedPiece().getImage(), c, b);
+			if (ChessInterface.getSelectedPiece().getCell().getColor() == Clr.WHITE) {
 				ChessInterface.getSelectedPiece().getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
-			}
-			else {
+			} else {
 				ChessInterface.getSelectedPiece().getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
+			}
+			if (!board.cells[c][b].isEmpty() && ChessInterface.getSelectedPiece().getCell().getColor() != board.cells[c][b].getColor()) {
+				ChessInterface.board.grid.getChildren().remove(board.cells[c][b].getPiece().getImage());
+			}
+			else if (!board.cells[c][b].isEmpty() && ChessInterface.getSelectedPiece().getCell().getColor() == board.cells[c][b].getColor()) {
+				System.out.println("caastling a m3lem");
+				/*Cell[] positions = ChessInterface.getSelectedPiece().calcCastling(board.cells[c][b]);
+				ImageView rookImage = board.cells[c][b].getPiece().getImage();
+				ChessInterface.board.grid.getChildren().remove(board.cells[c][b].getPiece().getImage());
+				ChessInterface.board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
+
+				board.grid.add(ChessInterface.getSelectedPiece().getImage(), positions[0].getEmplacement()[0], positions[0].getEmplacement()[1]);
+				board.grid.add(rookImage, positions[1].getEmplacement()[0], positions[1].getEmplacement()[1]);*/
+
+
+
 			}
 			ChessInterface.getSelectedPiece().makeMove(board.cells[c][b]);
 			//ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
@@ -211,6 +230,7 @@ public class Cell {
 
 			ChessInterface.getSelectedPiece().setClicked(false);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
+			System.out.println(ChessInterface.getSelectedPiece().getCell().getEmplacement()[0]);
 
 
 		}

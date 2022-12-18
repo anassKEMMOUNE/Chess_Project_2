@@ -10,10 +10,10 @@ public class Pawn extends Piece {
 
 
 	static Type type = Type.PAWN;
-	final ArrayList<Vector> whiteAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, -1), new Vector(0, -2)));
-	final ArrayList<Vector> blackAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, 1), new Vector(0, 2)));
+	final ArrayList<Vector> whiteAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, -1)));
+	final ArrayList<Vector> blackAuthorizedMoves = new ArrayList<Vector>(Arrays.asList(new Vector(0, 1)));
 	final ArrayList<Vector> whiteAttackMoves = new ArrayList<Vector>(Arrays.asList(new Vector(1, -1), new Vector(-1, -1)));
-	final ArrayList<Vector> blackAttackMoves   = new ArrayList<Vector>(Arrays.asList(new Vector(-1, -1), new Vector(1, -1)));
+	final ArrayList<Vector> blackAttackMoves   = new ArrayList<Vector>(Arrays.asList(new Vector(-1, 1), new Vector(1, 1)));
 
 
 	public Pawn(Player player) {
@@ -50,8 +50,8 @@ public class Pawn extends Piece {
 
 	public boolean validNormalMove(Cell finalCell) {
 		Cell initialCell = this.getCell();
-		int directionX = finalCell.getEmplacement()[0] - initialCell.getEmplacement()[0];
-		int directionY = finalCell.getEmplacement()[1] - initialCell.getEmplacement()[1];
+		int directionX = finalCell.getEmplacement()[0] - this.getCell().getEmplacement()[0];
+		int directionY = finalCell.getEmplacement()[1] - this.getCell().getEmplacement()[1];
 		Vector moveVector = new Vector(directionX, directionY);
 
 			if (!finalCell.isEmpty()){
@@ -62,7 +62,7 @@ public class Pawn extends Piece {
 				if(moveVector.getDirectionY() == -2 && moveVector.getDirectionX() == 0){
 
 					if(this.getCell().getEmplacement()[1] == 6 ){
-
+						System.out.println("hhh");
 						return finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]+1).isEmpty();//finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]-1).isEmpty()
 					}
 					else{
@@ -101,10 +101,12 @@ public class Pawn extends Piece {
 	@Override
 	public void attackPiece(Cell finalCell) {
 		if (validAttack(finalCell)) {
+			this.getCell().setPiece(null);
 			Piece takenPiece = finalCell.replacePiece(this);
 			takenPiece.setInGame(false);
 			this.getPlayer().getTakenPiece().add(takenPiece);
 		}
+
 	}
 
 	public boolean transformToQueen() {
@@ -127,9 +129,9 @@ public class Pawn extends Piece {
 
 	public boolean makeMove(Cell finalCell) {
 		if (validNormalMove(finalCell)) {
+			finalCell.setPiece(this);
 			this.getCell().setPiece(null);
 			this.setCell(finalCell);
-			finalCell.setPiece(this);
 
 
 		} else {

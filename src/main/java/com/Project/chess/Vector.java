@@ -36,6 +36,11 @@ public class Vector {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString(){
+		return "x : " + this.getDirectionX() + " y : " + this.getDirectionY();
+	}
 	
 	
 }

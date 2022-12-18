@@ -10,7 +10,7 @@ public class Player {
 	public int level;
 	public boolean goesFirst;
 	public boolean isTurn;
-	public ArrayList<Piece> TakenPiece;
+	public ArrayList<Piece> TakenPiece = new ArrayList<>();
 	public ArrayList<Pawn> PawnsArray = new ArrayList<>();
 	public ArrayList<Rook> RooksArray = new ArrayList<>();
 	public ArrayList<Bishop> BishopsArray = new ArrayList<>();

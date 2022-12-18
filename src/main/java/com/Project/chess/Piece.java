@@ -12,6 +12,7 @@ public abstract class Piece {
 	public String name;
 	public static String initialPath = "C:\\Users\\Mehdi\\Desktop\\Chess Project\\src\\main\\java\\com\\Project\\chess\\images\\";
 	public boolean clicked;
+	public Type type;
 	
 	public Piece( Player player){
 		this.cell = null;
@@ -22,6 +23,10 @@ public abstract class Piece {
 		this.imageWhite = null;
 		this.imageBlack = null;
 		this.clicked = false;
+	}
+	public Cell[] calcCastling(Cell finalCell){
+		Cell[] lis = new Cell[2];
+		return lis;
 	}
 	public boolean ValidMove(Cell finalCell){
 		return true;
@@ -36,7 +41,12 @@ public abstract class Piece {
 		this.cell = cell;
 
 	}
-
+	public boolean isFirstMove(){
+		return false;
+	}
+	public Type getType(){
+		return this.type;
+	}
 
 	public Player getPlayer() {
 		return player;
@@ -90,6 +100,7 @@ public abstract class Piece {
 		return this.clicked;
 	}
 	public void clickEvent(int a) {
+		this.calcMoves();
 		if (!this.getClicked() ) {
 			this.setClicked(true);
 			ChessInterface.setSelected(a);
@@ -106,6 +117,7 @@ public abstract class Piece {
 			ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
 		}
 	}
+
 
 	}
 	public void attackPiece(Cell finalCell) {

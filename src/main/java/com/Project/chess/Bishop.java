@@ -33,11 +33,10 @@ public class Bishop extends Piece {
 				}
 			}
 		}
-		
+		System.out.println(authorizedMoves);
 	}
 	@Override
 	public boolean ValidMove(Cell finalCell){
-		this.calcMoves();
 		Cell initialCell = this.getCell();
 		int directionX = finalCell.getEmplacement()[0]-initialCell.getEmplacement()[0];
 		int directionY = finalCell.getEmplacement()[1]-initialCell.getEmplacement()[1];
@@ -56,6 +55,7 @@ public class Bishop extends Piece {
 			return;
 		}
 		if(ValidMove(finalCell)){
+			this.getCell().setPiece(null);
 			Piece takenPiece = finalCell.replacePiece(this);
 			takenPiece.setInGame(false);
 			this.getPlayer().getTakenPiece().add(takenPiece);
@@ -69,6 +69,7 @@ public class Bishop extends Piece {
 			if(finalCell.isEmpty()){
 				finalCell.setPiece(this);
 				this.getCell().setPiece(null);
+				this.setCell(finalCell);
 			}
 			else{
 				if(finalCell.getPiece().getColor() == this.getColor()){ // add type rook to condition
