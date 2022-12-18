@@ -208,7 +208,7 @@ public class ChessInterface extends Application {
         ChessInterface.selectedPiece = selected;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {cd d
         launch(args);
 
     }

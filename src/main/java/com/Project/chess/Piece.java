@@ -85,6 +85,9 @@ public abstract class Piece {
 
 		}
 	}
+	public boolean validCasting(Cell finalCell){
+		return false;
+	}
 
 	public void setImageWhite(ImageView value) {
 		this.imageWhite = value;

@@ -60,28 +60,28 @@ public class King extends Piece {
 			}
 			else{
 				if(validCasting(finalCell)){
-					System.out.println("waaa khdem l castling");// add type rook to condition
-					int direction = finalCell.getEmplacement()[0]-this.getCell().getEmplacement()[0];
+					//System.out.println();// add type rook to condition
+					int direction = (this.getCell().getEmplacement()[0]-finalCell.getEmplacement()[0])/Math.abs(finalCell.getEmplacement()[0]-this.getCell().getEmplacement()[0]);
 					Vector vectKing;
 					Vector vectRook;
 					if(direction>0){
-						vectKing = new Vector(2*direction, 0);
-						vectRook = new Vector(2*(-direction), 0);
+						vectKing = new Vector(-2*direction, 0);
+						vectRook = new Vector(3*(direction), 0);
 					}
 					else{
-						vectKing = new Vector(2*direction, 0);
-						vectRook = new Vector(3*(-direction), 0);
+						vectKing = new Vector(-2*direction, 0);
+						vectRook = new Vector(2*(direction), 0);
 					}
 
 					Cell finalCellKing = this.getCell().add(vectKing);
-					Cell finalCellRook = this.getCell().add(vectRook);
+					Cell finalCellRook = finalCell.add(vectRook);
 					finalCellKing.setPiece(this);
 					this.getCell().setPiece(null);
 					this.setCell(finalCellKing);
 					finalCellRook.setPiece(finalCell.getPiece());
 					finalCell.setPiece(null);
 					finalCellRook.getPiece().setCell(finalCellRook);
-					System.out.println(finalCellRook.getEmplacement()[0]);
+					//System.out.println(" final Rook X Emplacement : " + finalCellRook.getEmplacement()[0]);
 				}
 				else{
 					attackPiece(finalCell);
@@ -97,18 +97,25 @@ public class King extends Piece {
 	@Override
 	public Cell[] calcCastling(Cell finalCell){
 		Cell[] listCastle = new Cell[2];
-		int direction = (finalCell.getEmplacement()[0]-this.getCell().getEmplacement()[0])/Math.abs(this.getCell().getEmplacement()[0] - finalCell.getEmplacement()[0]);
-		int norm = Math.abs(this.getCell().getEmplacement()[0] - finalCell.getEmplacement()[0]);
-		Vector vectKing = new Vector((norm-1)*direction, 0);
-		Vector vectRook = new Vector((norm-1)*(-direction), 0);
+		int direction = (this.getCell().getEmplacement()[0]-finalCell.getEmplacement()[0])/Math.abs(finalCell.getEmplacement()[0]-this.getCell().getEmplacement()[0]);
+		Vector vectKing;
+		Vector vectRook;
+		if(direction>0){
+			vectKing = new Vector(-2*direction, 0);
+			vectRook = new Vector(3*(direction), 0);
+		}
+		else{
+			vectKing = new Vector(-2*direction, 0);
+			vectRook = new Vector(2*(direction), 0);
+		}
+
 		Cell finalCellKing = this.getCell().add(vectKing);
-		Cell finalCellRook = this.getCell().add(vectRook);
-		finalCellKing.setPiece(this);
+		Cell finalCellRook = finalCell.add(vectRook);
 		listCastle[0] = finalCellKing;
 		listCastle[1] = finalCellRook;
 		return listCastle;
 	}
-
+	@Override
 	public boolean validCasting(Cell finalCell) {
 		if(!finalCell.isEmpty() && finalCell.getPiece().getType()==Type.ROOK && this.firstMove && finalCell.getPiece().isFirstMove()){
 			int direction = (finalCell.getEmplacement()[0]-this.getCell().getEmplacement()[0] )/Math.abs(this.getCell().getEmplacement()[0] - finalCell.getEmplacement()[0]);

@@ -201,8 +201,31 @@ public class Cell {
 			//if finalcell 3amra{
 			//ChessInterface.getSelectedPiece().getCell().setPiece(null);
 			//board.cells[c][b].setPiece(ChessInterface.getSelectedPiece());
-			board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
-			board.grid.add(ChessInterface.getSelectedPiece().getImage(), c, b);
+			if(!ChessInterface.getSelectedPiece().validCasting(board.cells[c][b])){
+				board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
+				board.grid.add(ChessInterface.getSelectedPiece().getImage(), c, b);
+			}
+			if (ChessInterface.getSelectedPiece().validCasting(board.cells[c][b])) {
+				Cell[] positions = ChessInterface.getSelectedPiece().calcCastling(board.cells[c][b]);
+				ImageView rookImage = board.cells[c][b].getPiece().getImage();
+
+				ChessInterface.board.grid.getChildren().remove(board.cells[c][b].getPiece().getImage());
+
+				ChessInterface.board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
+
+				board.grid.add(ChessInterface.getSelectedPiece().getImage(), positions[0].getEmplacement()[0], positions[0].getEmplacement()[1]);
+				board.grid.add(rookImage, positions[1].getEmplacement()[0], positions[1].getEmplacement()[1]);
+
+				System.out.println("rook x : " + positions[1].getEmplacement()[0]);
+				System.out.println("king  x : " + positions[0].getEmplacement()[0]);
+
+
+
+
+
+
+			}
+
 			if (ChessInterface.getSelectedPiece().getCell().getColor() == Clr.WHITE) {
 				ChessInterface.getSelectedPiece().getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
 			} else {
@@ -211,26 +234,12 @@ public class Cell {
 			if (!board.cells[c][b].isEmpty() && ChessInterface.getSelectedPiece().getCell().getColor() != board.cells[c][b].getColor()) {
 				ChessInterface.board.grid.getChildren().remove(board.cells[c][b].getPiece().getImage());
 			}
-			else if (!board.cells[c][b].isEmpty() && ChessInterface.getSelectedPiece().getCell().getColor() == board.cells[c][b].getColor()) {
-				System.out.println("caastling a m3lem");
-				/*Cell[] positions = ChessInterface.getSelectedPiece().calcCastling(board.cells[c][b]);
-				ImageView rookImage = board.cells[c][b].getPiece().getImage();
-				ChessInterface.board.grid.getChildren().remove(board.cells[c][b].getPiece().getImage());
-				ChessInterface.board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
-
-				board.grid.add(ChessInterface.getSelectedPiece().getImage(), positions[0].getEmplacement()[0], positions[0].getEmplacement()[1]);
-				board.grid.add(rookImage, positions[1].getEmplacement()[0], positions[1].getEmplacement()[1]);*/
-
-
-
-			}
 			ChessInterface.getSelectedPiece().makeMove(board.cells[c][b]);
 			//ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
 
 
 			ChessInterface.getSelectedPiece().setClicked(false);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
-			System.out.println(ChessInterface.getSelectedPiece().getCell().getEmplacement()[0]);
 
 
 		}
