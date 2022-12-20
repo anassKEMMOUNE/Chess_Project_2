@@ -26,7 +26,7 @@ public class Pawn extends Piece {
 	}
 	@Override
 	public boolean ValidMove(Cell finalCell){
-		return (validAttack(finalCell)||validNormalMove(finalCell));
+		return ((validAttack(finalCell)||validNormalMove(finalCell)));
 	}
 	public boolean validAttack(Cell finalCell) {
 		if (finalCell.isEmpty() || this.getColor() == finalCell.getPiece().getColor()) {

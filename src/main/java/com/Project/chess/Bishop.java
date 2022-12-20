@@ -37,6 +37,7 @@ public class Bishop extends Piece {
 	}
 	@Override
 	public boolean ValidMove(Cell finalCell){
+		this.calcMoves();
 		Cell initialCell = this.getCell();
 		int directionX = finalCell.getEmplacement()[0]-initialCell.getEmplacement()[0];
 		int directionY = finalCell.getEmplacement()[1]-initialCell.getEmplacement()[1];

@@ -13,6 +13,7 @@ public abstract class Piece {
 	public static String initialPath = "C:\\Users\\Mehdi\\Desktop\\Chess Project\\src\\main\\java\\com\\Project\\chess\\images\\";
 	public boolean clicked;
 	public Type type;
+	public boolean isTurn;
 	
 	public Piece( Player player){
 		this.cell = null;
@@ -23,6 +24,12 @@ public abstract class Piece {
 		this.imageWhite = null;
 		this.imageBlack = null;
 		this.clicked = false;
+		if(player.getColor()==Clr.WHITE){
+			this.isTurn = true;
+		}
+		else{
+			this.isTurn = false;
+		}
 	}
 	public Cell[] calcCastling(Cell finalCell){
 		Cell[] lis = new Cell[2];
@@ -36,7 +43,12 @@ public abstract class Piece {
 		return cell;
 	}
 
-
+	public boolean getTurn(){
+		return this.isTurn;
+	}
+	public void setTurn(boolean value){
+		this.isTurn = value;
+	}
 	public void setCell(Cell cell) {
 		this.cell = cell;
 
@@ -103,6 +115,7 @@ public abstract class Piece {
 		return this.clicked;
 	}
 	public void clickEvent(int a) {
+
 		this.calcMoves();
 		if (!this.getClicked() ) {
 			this.setClicked(true);

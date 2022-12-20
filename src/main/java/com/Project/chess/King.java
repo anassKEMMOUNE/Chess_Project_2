@@ -18,7 +18,7 @@ public class King extends Piece {
 	}
 	@Override
 	public boolean ValidMove(Cell finalCell){
-		return(this.ValidNormalMove(finalCell)||validCasting(finalCell));
+		return((this.ValidNormalMove(finalCell)||validCasting(finalCell)) && !finalCell.reachable(this));
 	}
 	public boolean ValidNormalMove(Cell finalCell){
 		Cell initialCell = this.getCell();
@@ -139,6 +139,30 @@ public class King extends Piece {
 		else{
 			return false;
 		}
+	}
+
+	public boolean checkmate(){
+		ArrayList<Cell> possibleCells = new ArrayList<>();
+		for(Vector vect__ : authorizedMoves){
+			try{
+				possibleCells.add(this.getCell().add(vect__));
+			}catch (Exception e){
+				System.out.println("a possible move is out of the board");
+			}
+		}
+		for(Cell cell : possibleCells){
+			if(!cell.reachable(this) && this.ValidMove(cell)){
+				return false;
+			}
+		}
+		System.out.println("can't move the king move another piece to protect your king");
+		return true;
+
+	}
+	@Override
+	public void calcMoves(){
+		this.checkmate();
+		System.out.println("move calc for king ...");
 	}
 	
 	

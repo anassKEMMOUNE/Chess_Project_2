@@ -129,7 +129,8 @@ public class ChessInterface extends Application {
 
         board = new Board();
         GridPane grid = board.grid;
-
+        board.player1.setTurn(true);
+        board.player2.setTurn(false);
 
 
         //board.player1.moveAnass(0);
@@ -208,7 +209,7 @@ public class ChessInterface extends Application {
         ChessInterface.selectedPiece = selected;
     }
 
-    public static void main(String[] args) {cd d
+    public static void main(String[] args) {
         launch(args);
 
     }

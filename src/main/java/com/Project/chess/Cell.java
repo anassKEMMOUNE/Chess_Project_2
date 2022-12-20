@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Cell {
@@ -196,6 +197,30 @@ public class Cell {
 		System.out.println(verticalVectors);
 		return verticalVectors;
 	}
+	public boolean reachable(Piece piece){
+		ArrayList<Vector> possibleVectors = this.getDiagonal();
+		possibleVectors.addAll(this.getVertical());
+		ArrayList<Vector> knightMoves =  new ArrayList<Vector>(Arrays.asList(new Vector(1,2), new Vector(2,1), new Vector(1,-2), new Vector(2,-1), new Vector(-2, 1), new Vector(-1,2), new Vector(-2,-1), new Vector(-1,-2)));
+		for(Vector vect_ : knightMoves){
+			try{
+				this.add(vect_);
+				possibleVectors.add(vect_);
+
+			}catch(Exception e){
+				System.out.println("knight vectors went wrong in reachable method");
+
+			}
+		}
+		for(Vector vect__ : possibleVectors){
+			if(!this.add(vect__).isEmpty() && piece.getColor() != this.add(vect__).getPiece().getColor()){
+				if(this.add(vect__).getPiece().ValidMove(this)){
+					return true;
+				}
+			}
+		}
+		return false;
+
+	}
 	public void clickEvent(int c, int b) {
 		if (ChessInterface.getSelectedPiece().getClicked() && ChessInterface.getSelectedPiece().ValidMove(board.cells[c][b])) {
 			//if finalcell 3amra{
@@ -240,7 +265,7 @@ public class Cell {
 
 			ChessInterface.getSelectedPiece().setClicked(false);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
-
+			System.out.println("Reachable : "+ this.reachable(ChessInterface.getSelectedPiece()));
 
 		}
 	}
