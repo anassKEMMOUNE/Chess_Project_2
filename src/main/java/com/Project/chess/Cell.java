@@ -260,8 +260,14 @@ public class Cell {
 				ChessInterface.board.grid.getChildren().remove(board.cells[c][b].getPiece().getImage());
 			}
 			ChessInterface.getSelectedPiece().makeMove(board.cells[c][b]);
+			ChessInterface.getSelectedPiece().getPlayer().isTurn = false;
+			if(ChessInterface.getSelectedPiece().getPlayer().getColor() == Clr.WHITE){
+				ChessInterface.board.player2.isTurn = true;
+			}
+			else{
+				ChessInterface.board.player1.isTurn = true;
+			}
 			//ChessInterface.getSelectedPiece().setCell(board.cells[c][b]);
-
 
 			ChessInterface.getSelectedPiece().setClicked(false);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);

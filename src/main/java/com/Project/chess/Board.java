@@ -10,7 +10,7 @@ public class Board {
     public GridPane grid = new GridPane();
     public Pane container = new Pane();
     public Player player1  ;
-    Player player2 ;
+    public Player player2 ;
 
     public Board(){
         for(int row =0;row<8;row++){

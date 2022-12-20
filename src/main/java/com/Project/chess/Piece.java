@@ -115,24 +115,27 @@ public abstract class Piece {
 		return this.clicked;
 	}
 	public void clickEvent(int a) {
+		if(this.player.isTurn){
+			this.calcMoves();
+			if (!this.getClicked() ) {
+				this.setClicked(true);
+				ChessInterface.setSelected(a);
+				ChessInterface.setSelectedPiece(this);
+				ChessInterface.oldSelectedPieces.add(this);
+				this.getCell().getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
+			}
+			for ( int i = 0 ; i< ChessInterface.oldSelectedPieces.size()-1;i++){
+				ChessInterface.oldSelectedPieces.get(i).setClicked(false);
+				if (ChessInterface.oldSelectedPieces.get(i).getCell().getColor() == Clr.WHITE){
+					ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
+				}
+				else {
+					ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
+				}
+			}
 
-		this.calcMoves();
-		if (!this.getClicked() ) {
-			this.setClicked(true);
-			ChessInterface.setSelected(a);
-			ChessInterface.setSelectedPiece(this);
-			ChessInterface.oldSelectedPieces.add(this);
-			this.getCell().getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
 		}
-	for ( int i = 0 ; i< ChessInterface.oldSelectedPieces.size()-1;i++){
-		ChessInterface.oldSelectedPieces.get(i).setClicked(false);
-		if (ChessInterface.oldSelectedPieces.get(i).getCell().getColor() == Clr.WHITE){
-			ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
-		}
-		else {
-			ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
-		}
-	}
+
 
 
 	}
