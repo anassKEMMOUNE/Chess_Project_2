@@ -2,6 +2,9 @@ package com.Project.chess;
 
 import javafx.scene.image.ImageView;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public abstract class Piece {
 	public Cell cell;
 	public Player player;
@@ -10,11 +13,10 @@ public abstract class Piece {
 	public ImageView imageWhite;
 	public ImageView imageBlack;
 	public String name;
-	public static String initialPath = "C:\\Users\\Mehdi\\Desktop\\Chess Project\\src\\main\\java\\com\\Project\\chess\\images\\";
 	public boolean clicked;
 	public Type type;
 	public boolean isTurn;
-	
+	public static String initialPath= Paths.get("").toAbsolutePath().toString().concat("\\src\\main\\java\\com\\Project\\chess\\images\\");
 	public Piece( Player player){
 		this.cell = null;
 		this.player = player;
@@ -133,6 +135,7 @@ public abstract class Piece {
 					ChessInterface.oldSelectedPieces.get(i).getCell().getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
 				}
 			}
+
 
 		}
 

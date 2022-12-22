@@ -112,11 +112,11 @@ public class ChessInterface extends Application {
         txt2.setEffect(shadow);
         txt.setEffect(shadow);
         t1.setLayoutX(280);
-        t1.setLayoutY(322);
+        t2.setLayoutY(322);
         t1.setPrefSize(250, 40);
         t2.setPrefSize(250, 40);
         t2.setLayoutX(280);
-        t2.setLayoutY(238);
+        t1.setLayoutY(238);
         toot.getChildren().addAll(new ImageView(Piece.initialPath.concat("page2_background.png")),txt,txt2,txt3,btn2,btn1,t1,t2);
         btn2.setLayoutX(70);
         btn2.setLayoutY(530);
@@ -129,8 +129,7 @@ public class ChessInterface extends Application {
 
         board = new Board();
         GridPane grid = board.grid;
-        board.player1.setTurn(true);
-        board.player2.setTurn(false);
+
 
 
         //board.player1.moveAnass(0);
@@ -156,9 +155,9 @@ public class ChessInterface extends Application {
 
 
         for (int i=0;i<8;i++){
-             int c =  i;
+            int c =  i;
             for (int j =0;j<8;j++){
-                 int b = j;
+                int b = j;
 
                 board.cells[i][j].getTile().setOnMouseClicked(mouseEvent -> board.cells[c][b].clickEvent(c,b));
             }
@@ -176,13 +175,22 @@ public class ChessInterface extends Application {
 
 
         Scene scene2 = new Scene(board.container, 600, 600);
-
+        Text player1out = new Text();
+        Text player2out = new Text();
+        player1out.setLayoutX(490);
+        player2out.setLayoutY(30);
+        player1out.setStyle("-fx-font-family: roboto; -fx-font-size: 20 ; -fx-fill: white; -fx-font-weight: 700; -fx-stroke: black ");
+        player2out.setLayoutX(50);
+        player1out.setLayoutY(582);
+        player2out.setStyle("-fx-font-family: roboto; -fx-font-size: 20 ; -fx-fill: black;-fx-font-weight: 700; -fx-stroke: #868484");
         btn.setOnMouseClicked(mouseEvent -> stage.setScene(tootScene));
         btn2.setOnMouseClicked(mouseEvent -> {stage.setScene(scene2);
-                board.player1.setName(t1.getText());
-                //board.container.add
-                System.out.println(board.player1.getName());
-
+                    board.player1.setName(t1.getText());
+                    board.player2.setName(t2.getText());
+                    player1out.setText(board.player1.getName().toUpperCase());
+                    player2out.setText(board.player2.getName().toUpperCase());
+                    board.container.getChildren().addAll(player1out,player2out);
+                    System.out.println(board.player1.getName());
                 }
         );
 
@@ -211,6 +219,7 @@ public class ChessInterface extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
 
     }
 }

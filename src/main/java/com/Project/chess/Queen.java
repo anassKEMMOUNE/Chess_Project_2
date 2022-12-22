@@ -72,10 +72,14 @@ public class Queen extends Piece {
 			return;
 		}
 		if(ValidMove(finalCell)){
+			ChessInterface.board.grid.getChildren().remove(finalCell.getPiece().getImage());
 			this.getCell().setPiece(null);
 			Piece takenPiece = finalCell.replacePiece(this);
 			takenPiece.setInGame(false);
 			this.getPlayer().getTakenPiece().add(takenPiece);
+			ChessInterface.board.grid.getChildren().remove(finalCell.getPiece().getImage());
+			ChessInterface.board.grid.add(this.getImage(),finalCell.getEmplacement()[0],finalCell.getEmplacement()[1]);
+
 		}
 
 	}
@@ -87,6 +91,9 @@ public class Queen extends Piece {
 				finalCell.setPiece(this);
 				this.getCell().setPiece(null);
 				this.setCell(finalCell);
+				ChessInterface.board.grid.getChildren().remove(this.getImage());
+				ChessInterface.board.grid.add(this.getImage(),finalCell.getEmplacement()[0],finalCell.getEmplacement()[1]);
+
 			}
 			else{
 				if(finalCell.getPiece().getColor() == this.getColor()){ // add type rook to condition
