@@ -18,7 +18,7 @@ public class ChessFinalPage extends Application{
     public void start(Stage stage) throws Exception{
         Pane froot = new Pane();
         stage.setScene(new Scene(froot,600,600));
-        Text trt = new Text("CONGRATULATION");
+        Text trt = new Text("CONGRATULATIONS");
         Button bto = new Button();
         Button btoo = new Button();
         bto.setPrefSize(64,64);

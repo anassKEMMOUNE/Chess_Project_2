@@ -127,7 +127,7 @@ public abstract class Piece {
 				ChessInterface.setSelected(a);
 				ChessInterface.setSelectedPiece(this);
 				ChessInterface.oldSelectedPieces.add(this);
-				this.getCell().getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
+				this.getCell().getTile().setStyle("-fx-background-color: rgba(63,128,63,0.18)");
 			}
 			for ( int i = 0 ; i< ChessInterface.oldSelectedPieces.size()-1;i++){
 				ChessInterface.oldSelectedPieces.get(i).setClicked(false);
@@ -170,13 +170,15 @@ public void colorAllValidMoves(){
 	ArrayList<Cell> path = new ArrayList<>();
 	for (int i = 0; i < 8; i++) {
 		for (int j= 0; j<8;j++){
-			if (this.ValidMove(ChessInterface.board.getCell(i,j))){
+			if (this.ValidMove(ChessInterface.board.getCell(i,j)) && this.type != Type.ROOK){
 				ChessInterface.board.cells[i][j].getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
 				path.add(ChessInterface.board.cells[i][j]);
 			}
+
 		}
 
 	}
+	System.out.println(this.name + " "+ path);
 	ChessInterface.oldSelectedPaths.add(path);
 }
 }

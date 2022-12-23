@@ -128,6 +128,42 @@ public class ChessInterface extends Application {
         btn1.setPrefSize(218,63);
         btn1.setStyle("-fx-background-color: #010101; -fx-text-fill: white; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)");
 
+
+
+        Pane froot = new Pane();
+
+        Text trt = new Text("CONGRATULATIONS");
+        Text playerWon = new Text("Player Won");
+        playerWon.setLayoutX(300);
+        playerWon.setLayoutY(300);
+        Button bto = new Button();
+        Button btoo = new Button();
+        bto.setPrefSize(64,64);
+        btoo.setPrefSize(64,64);
+        ImageView vi = new ImageView(Piece.initialPath.concat("home.png"));
+        ImageView vii = new ImageView(Piece.initialPath.concat("tourner.png"));
+
+        bto.setGraphic(vi);
+        bto.setLayoutX(190);
+        bto.setLayoutY(470);
+        bto.setStyle("-fx-background-color: white; -fx-text-fill: white; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)");
+        btoo.setLayoutX(320);
+        btoo.setLayoutY(470);
+        btoo.setGraphic(vii);
+        btoo.setStyle("-fx-background-color: white; -fx-text-fill: white; -fx-font-weight:700; -fx-font-family:roboto ;-fx-font-size:24;-fx-background-radius:25;-fx-effect:dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0)");
+        trt.setLayoutY(80);
+        trt.setLayoutX(55);
+        trt.setStyle("-fx-font-size:60");
+        Font bont = Font.font("Brush Script MT", FontWeight.BOLD, FontPosture.REGULAR, 65);
+        trt.setFont(bont);
+        trt.setFill(Color.YELLOW);
+        trt.setStrokeWidth(2);
+        trt.setStroke(Color.ORANGE);
+        froot.getChildren().addAll(new ImageView(Piece.initialPath.concat("finale_background.png")),trt,bto,btoo,playerWon);
+        Scene sceneFinal = new Scene(froot,600,600);
+
+
+
         board = new Board();
         GridPane grid = board.grid;
 
@@ -160,9 +196,20 @@ public class ChessInterface extends Application {
             for (int j =0;j<8;j++){
                 int b = j;
 
-                board.cells[i][j].getTile().setOnMouseClicked(mouseEvent -> board.cells[c][b].clickEvent(c,b));
+                board.cells[i][j].getTile().setOnMouseClicked(mouseEvent -> {board.cells[c][b].clickEvent(c,b);
+                    if (board.player1.king.checkedTest == true){
+                        playerWon.setText(board.player1.getName()+" "+"Won");
+                        stage.setScene(sceneFinal);}
+                    if (board.player2.king.checkedTest == true){
+                        playerWon.setText(board.player2.getName()+" "+"Won");
+                        stage.setScene(sceneFinal);}
+                    }
+
+                    );
+
+                }
             }
-        }
+
 
 
 
@@ -194,6 +241,58 @@ public class ChessInterface extends Application {
                     System.out.println(board.player1.getName());
                 }
         );
+        ImageView restart = new ImageView(Piece.initialPath.concat("restart.png"));
+        restart.setOnMouseClicked(mouseEvent -> {ChessInterface.board.resetBoard();
+            for (int i=0;i<8;i++){
+                int a = i;
+                board.player1.PawnsArray.get(i).getImage().setOnMouseClicked(e -> board.player1.PawnsArray.get(a).clickEvent(a));
+                board.player2.PawnsArray.get(i).getImage().setOnMouseClicked(e -> board.player2.PawnsArray.get(a).clickEvent(a));
+
+            }
+            for (int i=0;i<2;i++){
+                int a = i;
+                board.player1.RooksArray.get(i).getImage().setOnMouseClicked(e -> board.player1.RooksArray.get(a).clickEvent(a));
+                board.player2.RooksArray.get(i).getImage().setOnMouseClicked(e -> board.player2.RooksArray.get(a).clickEvent(a));
+                board.player1.KnightsArray.get(i).getImage().setOnMouseClicked(e -> board.player1.KnightsArray.get(a).clickEvent(a));
+                board.player2.KnightsArray.get(i).getImage().setOnMouseClicked(e -> board.player2.KnightsArray.get(a).clickEvent(a));
+                board.player1.BishopsArray.get(i).getImage().setOnMouseClicked(e -> board.player1.BishopsArray.get(a).clickEvent(a));
+                board.player2.BishopsArray.get(i).getImage().setOnMouseClicked(e -> board.player2.BishopsArray.get(a).clickEvent(a));
+                board.player1.king.getImage().setOnMouseClicked(e -> board.player1.king.clickEvent(a));
+                board.player2.king.getImage().setOnMouseClicked(e -> board.player2.king.clickEvent(a));
+                board.player1.queen.getImage().setOnMouseClicked(e -> board.player1.queen.clickEvent(a));
+                board.player2.queen.getImage().setOnMouseClicked(e -> board.player2.queen.clickEvent(a));
+            }
+
+
+            for (int i=0;i<8;i++){
+                int c =  i;
+                for (int j =0;j<8;j++){
+                    int b = j;
+
+                    board.cells[i][j].getTile().setOnMouseClicked(e -> {board.cells[c][b].clickEvent(c,b);
+                                if (board.player1.king.checkedTest == true){
+                                    playerWon.setText(board.player1.getName()+" "+"Won");
+                                    stage.setScene(sceneFinal);}
+                                if (board.player2.king.checkedTest == true){
+                                    playerWon.setText(board.player2.getName()+" "+"Won");
+                                    stage.setScene(sceneFinal);}
+                            }
+
+                    );
+
+                }
+            }
+
+        });
+        restart.setLayoutX(560);
+        restart.setLayoutY(7);
+        restart.setFitHeight(35);
+        restart.setFitWidth(35);
+
+        board.container.getChildren().add(restart);
+
+
+
 
         stage.setResizable(false);
         stage.setScene(scene1);

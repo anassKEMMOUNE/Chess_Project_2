@@ -291,5 +291,11 @@ public class Cell {
 
 
 		}
+		if (ChessInterface.board.player1.king.checkmate()){
+			ChessInterface.board.player1.king.checkedTest = true;
+		}
+		if (ChessInterface.board.player2.king.checkmate()){
+			ChessInterface.board.player2.king.checkedTest = true;
+		}
 	}
 }
