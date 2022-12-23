@@ -4,6 +4,7 @@ import javafx.scene.image.ImageView;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public abstract class Piece {
 	public Cell cell;
@@ -15,6 +16,7 @@ public abstract class Piece {
 	public String name;
 	public boolean clicked;
 	public Type type;
+	public static int counter = 0;
 	public boolean isTurn;
 	public static String initialPath= Paths.get("").toAbsolutePath().toString().concat("\\src\\main\\java\\com\\Project\\chess\\images\\");
 	public Piece( Player player){
@@ -118,6 +120,7 @@ public abstract class Piece {
 	}
 	public void clickEvent(int a) {
 		if(this.player.isTurn){
+			colorAllValidMoves();
 			this.calcMoves();
 			if (!this.getClicked() ) {
 				this.setClicked(true);
@@ -136,6 +139,20 @@ public abstract class Piece {
 				}
 			}
 
+			for ( int i = 0 ; i< ChessInterface.oldSelectedPaths.size()-1;i++){
+				for (Cell j : ChessInterface.oldSelectedPaths.get(i)){
+					if (!this.ValidMove(j)){
+						if (j.getColor() == Clr.WHITE){
+							j.getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
+						}
+						else {
+							j.getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
+						}
+					}
+					}
+			}
+
+
 
 		}
 
@@ -149,7 +166,19 @@ public abstract class Piece {
 	}
 	public void calcMoves() {
 	}
+public void colorAllValidMoves(){
+	ArrayList<Cell> path = new ArrayList<>();
+	for (int i = 0; i < 8; i++) {
+		for (int j= 0; j<8;j++){
+			if (this.ValidMove(ChessInterface.board.getCell(i,j))){
+				ChessInterface.board.cells[i][j].getTile().setStyle("-fx-background-color: rgba(59,166,60,0.3)");
+				path.add(ChessInterface.board.cells[i][j]);
+			}
+		}
 
+	}
+	ChessInterface.oldSelectedPaths.add(path);
+}
 }
 
 

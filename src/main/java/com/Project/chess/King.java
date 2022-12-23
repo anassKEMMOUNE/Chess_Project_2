@@ -18,7 +18,7 @@ public class King extends Piece {
 	}
 	@Override
 	public boolean ValidMove(Cell finalCell){
-		return((this.ValidNormalMove(finalCell)||validCasting(finalCell)) && !finalCell.reachable(this));
+		return((this.ValidNormalMove(finalCell)||validCasting(finalCell)) && finalCell.reachable(this)[0] == 0);
 	}
 	public boolean ValidNormalMove(Cell finalCell){
 		Cell initialCell = this.getCell();
@@ -132,44 +132,58 @@ public class King extends Piece {
 			for(int i = 0; i<norm-1;i++){
 				Cell intermediate = actualCell.add(vect_);
 				if(!intermediate.isEmpty()){
-					System.out.println("3amraa a m3lam");;
+
 					return false;
-				}
-				else{
-					System.out.println("hh l9itiha a m3lam");
 				}
 
 				actualCell = intermediate;
 			}
-			return true;
+			return (finalCell.getPiece().getColor() == this.getColor());
+
 		}
 		else{
 			return false;
 		}
 	}
 
-	public boolean checkmate(){
+	public int nonAccessible(){
+		int counter = 0;
 		ArrayList<Cell> possibleCells = new ArrayList<>();
 		for(Vector vect__ : authorizedMoves){
 			try{
 				possibleCells.add(this.getCell().add(vect__));
 			}catch (Exception e){
-				System.out.println("a possible move is out of the board");
+
 			}
 		}
 		for(Cell cell : possibleCells){
-			if(!cell.reachable(this) && this.ValidMove(cell)){
-				return false;
+			if(this.ValidMove(cell) && cell.reachable(this)[0] ==1){
+				System.out.println(cell.getEmplacement());
+				counter++;
 			}
 		}
-		System.out.println("can't move the king move another piece to protect your king");
-		return true;
+
+		return counter;
 
 	}
-	@Override
-	public void calcMoves(){
-		this.checkmate();
-		System.out.println("move calc for king ...");
+	public boolean checkmate(){
+		ArrayList<Cell> validCells = new ArrayList<Cell>();
+		for(Vector vect_ : authorizedMoves){
+			try{
+				if(this.ValidMove(this.getCell().add(vect_))){
+					validCells.add(this.getCell().add(vect_));
+
+				}
+}catch (Exception e){
+
+			}
+		}
+		if(validCells.size() == 0 && this.getCell().reachable(this)[1] >= 2 ){
+			System.out.println("checkmate !!");
+			return true;
+		}
+		return false;
+
 	}
 	
 	

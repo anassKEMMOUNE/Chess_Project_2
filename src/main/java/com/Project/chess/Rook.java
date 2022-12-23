@@ -40,7 +40,6 @@ public class Rook extends Piece {
 				}
 			}
 		}
-		System.out.println(authorizedMoves);
 	}
 	@Override
 	public boolean ValidMove(Cell finalCell){

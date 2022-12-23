@@ -194,10 +194,11 @@ public class Cell {
 			}
 			currentY++;
 		}
-		System.out.println(verticalVectors);
 		return verticalVectors;
 	}
-	public boolean reachable(Piece piece){
+	public int[] reachable(Piece piece){
+		int counter = 0;
+		int[] lis = new int[2];
 		ArrayList<Vector> possibleVectors = this.getDiagonal();
 		possibleVectors.addAll(this.getVertical());
 		ArrayList<Vector> knightMoves =  new ArrayList<Vector>(Arrays.asList(new Vector(1,2), new Vector(2,1), new Vector(1,-2), new Vector(2,-1), new Vector(-2, 1), new Vector(-1,2), new Vector(-2,-1), new Vector(-1,-2)));
@@ -207,18 +208,25 @@ public class Cell {
 				possibleVectors.add(vect_);
 
 			}catch(Exception e){
-				System.out.println("knight vectors went wrong in reachable method");
 
 			}
 		}
 		for(Vector vect__ : possibleVectors){
 			if(!this.add(vect__).isEmpty() && piece.getColor() != this.add(vect__).getPiece().getColor()){
 				if(this.add(vect__).getPiece().ValidMove(this)){
-					return true;
+					counter ++;
 				}
 			}
 		}
-		return false;
+		if(counter == 0){
+			lis[0] = 0;
+		}
+		else{
+			lis[0] = 1;
+		}
+		lis[1] = counter;
+
+		return lis;
 
 	}
 	public void clickEvent(int c, int b) {
@@ -233,8 +241,6 @@ public class Cell {
 				ChessInterface.board.grid.getChildren().remove(ChessInterface.getSelectedPiece().getImage());
 				board.grid.add(ChessInterface.getSelectedPiece().getImage(), positions[0].getEmplacement()[0], positions[0].getEmplacement()[1]);
 				board.grid.add(rookImage, positions[1].getEmplacement()[0], positions[1].getEmplacement()[1]);
-				System.out.println("rook x : " + positions[1].getEmplacement()[0]);
-				System.out.println("king  x : " + positions[0].getEmplacement()[0]);
 			}
 
 			if (ChessInterface.getSelectedPiece().getCell().getColor() == Clr.WHITE) {
@@ -253,8 +259,36 @@ public class Cell {
 			}
 
 			ChessInterface.getSelectedPiece().setClicked(false);
-			System.out.println("Reachable : "+ this.reachable(ChessInterface.getSelectedPiece()));
+			System.out.println("Reachable : "+ this.reachable(ChessInterface.getSelectedPiece())[0]);
 			ChessInterface.oldSelectedPieces.removeAll(ChessInterface.oldSelectedPieces);
+
+				for (Cell j : ChessInterface.oldSelectedPaths.get(ChessInterface.oldSelectedPaths.size()-1)){
+					if (!ChessInterface.getSelectedPiece().ValidMove(j)){
+						if (j.getColor() == Clr.WHITE){
+							j.getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
+						}
+						else {
+							j.getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
+						}
+					}
+			}
+			for (int i = 0; i < 8; i++) {
+				for (int j= 0; j<8;j++){
+
+					if (ChessInterface.board.cells[i][j].getColor() == Clr.WHITE){
+						ChessInterface.board.cells[i][j].getTile().setStyle("-fx-background-color: ".concat(Cell.whiteColor));
+					}
+					else {
+						ChessInterface.board.cells[i][j].getTile().setStyle("-fx-background-color: ".concat(Cell.blackColor));
+					}
+
+
+				}
+
+			}
+
+			//ChessInterface.oldSelectedPaths.removeAll(ChessInterface.oldSelectedPaths);
+
 
 		}
 	}

@@ -27,6 +27,7 @@ public class ChessInterface extends Application {
     public static Board board;
 
     public static ArrayList<Piece> oldSelectedPieces = new ArrayList<>();
+    public static ArrayList<ArrayList<Cell>> oldSelectedPaths = new ArrayList<>();
 
     public void start(Stage stage) {
 

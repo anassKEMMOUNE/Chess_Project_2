@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Pawn extends Piece {
 
@@ -62,7 +63,6 @@ public class Pawn extends Piece {
 				if(moveVector.getDirectionY() == -2 && moveVector.getDirectionX() == 0){
 
 					if(this.getCell().getEmplacement()[1] == 6 ){
-						System.out.println("hhh");
 						return finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]+1).isEmpty();//finalCell.getBoard().getCell(finalCell.getEmplacement()[0], finalCell.getEmplacement()[1]-1).isEmpty()
 					}
 					else{
@@ -146,8 +146,124 @@ public class Pawn extends Piece {
 				attackPiece(finalCell);
 			}
 		}
-		return this.transformToQueen();
+		this.promotion();
+		return true;
 
+	}
+	public boolean promotion(){
+
+		if(this.getCell().getEmplacement()[1] == 0 ){
+			System.out.println("Choose your piece :  ");
+			System.out.println("Tap '1' for Queen ");
+			System.out.println("Tap '2' for Rook ");
+			System.out.println("Tap '3' for BISHOP ");
+			System.out.println("Tap '4' for KNIGHT ");
+			Scanner sc = new Scanner(System.in);
+			int n = sc.nextInt();
+			switch(n){
+				case 1:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][0].getPiece().getImage());
+					ImageView newimage = new ImageView(Piece.initialPath.concat("queenWhite.png"));
+					ChessInterface.board.grid.add(newimage, this.getCell().getEmplacement()[0], 0);
+					Queen newQueen = new Queen(this.getPlayer());
+					newQueen.setCell(this.getCell());
+					newQueen.setImageWhite(newimage);
+					this.getCell().setPiece(newQueen);
+					newQueen.getImage().setOnMouseClicked(mouseEvent -> newQueen.clickEvent(0));
+					break;
+				case 2:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][0].getPiece().getImage());
+					ImageView newimagee = new ImageView(Piece.initialPath.concat("rookWhite.png"));
+					ChessInterface.board.grid.add(newimagee, this.getCell().getEmplacement()[0], 0);
+					Rook newRook = new Rook(this.getPlayer());
+					newRook.setCell(this.getCell());
+					newRook.setImageWhite(newimagee);
+					this.getCell().setPiece(newRook);
+					newRook.getImage().setOnMouseClicked(mouseEvent -> newRook.clickEvent(0));
+					break;
+				case 3:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][0].getPiece().getImage());
+					ImageView newimageee = new ImageView(Piece.initialPath.concat("bishopWhite.png"));
+					ChessInterface.board.grid.add(newimageee, this.getCell().getEmplacement()[0], 0);
+					Bishop newBishop = new Bishop(this.getPlayer());
+					newBishop.setCell(this.getCell());
+					newBishop.setImageWhite(newimageee);
+					this.getCell().setPiece(newBishop);
+					newBishop.getImage().setOnMouseClicked(mouseEvent -> newBishop.clickEvent(0));
+					break;
+				case 4:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][0].getPiece().getImage());
+					ImageView newimag = new ImageView(Piece.initialPath.concat("knightWhite.png"));
+					ChessInterface.board.grid.add(newimag, this.getCell().getEmplacement()[0], 0);
+					Knight newKnight = new Knight(this.getPlayer());
+					newKnight.setCell(this.getCell());
+					newKnight.setImageWhite(newimag);
+					this.getCell().setPiece(newKnight);
+					newKnight.getImage().setOnMouseClicked(mouseEvent -> newKnight.clickEvent(0));
+
+					break;
+				default:
+					System.out.println("chose a valid a move :");
+			}
+			return true;
+
+
+		}else if(this.getCell().getEmplacement()[1] == 7){
+			System.out.println("Choose your piece : ");
+			System.out.println("Tap '1' for Queen ");
+			System.out.println("Tap '2' for Rook ");
+			System.out.println("Tap '3' for BISHOP ");
+			System.out.println("Tap '4' for KNIGHT ");
+			Scanner sc = new Scanner(System.in);
+			int n = sc.nextInt();
+			switch(n){
+				case 1:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][7].getPiece().getImage());
+					ImageView newimage = new ImageView(Piece.initialPath.concat("queenBlack.png"));
+					ChessInterface.board.grid.add(newimage, this.getCell().getEmplacement()[0], 7);
+					Queen newQueen = new Queen(this.getPlayer());
+					newQueen.setCell(this.getCell());
+					newQueen.setImageBlack(newimage);
+					this.getCell().setPiece(newQueen);
+					newQueen.getImage().setOnMouseClicked(mouseEvent -> newQueen.clickEvent(0));
+					break;
+				case 2:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][7].getPiece().getImage());
+					ImageView newimagee = new ImageView(Piece.initialPath.concat("rookBlack.png"));
+					ChessInterface.board.grid.add(newimagee, this.getCell().getEmplacement()[0], 7);
+					Rook newRook = new Rook(this.getPlayer());
+					newRook.setCell(this.getCell());
+					newRook.setImageBlack(newimagee);
+					this.getCell().setPiece(newRook);
+					newRook.getImage().setOnMouseClicked(mouseEvent -> newRook.clickEvent(0));
+					break;
+				case 3:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][7].getPiece().getImage());
+					ImageView newimageee = new ImageView(Piece.initialPath.concat("bishopBlack.png"));
+					ChessInterface.board.grid.add(newimageee, this.getCell().getEmplacement()[0], 7);
+					Bishop newBishop = new Bishop(this.getPlayer());
+					newBishop.setCell(this.getCell());
+					newBishop.setImageBlack(newimageee);
+					this.getCell().setPiece(newBishop);
+					newBishop.getImage().setOnMouseClicked(mouseEvent -> newBishop.clickEvent(0));
+					break;
+				case 4:
+					ChessInterface.board.grid.getChildren().remove(ChessInterface.board.cells[this.getCell().getEmplacement()[0]][7].getPiece().getImage());
+					ImageView newimag = new ImageView(Piece.initialPath.concat("knightBlack.png"));
+					ChessInterface.board.grid.add(newimag, this.getCell().getEmplacement()[0], 7);
+					Knight newKnight = new Knight(this.getPlayer());
+					newKnight.setCell(this.getCell());
+					newKnight.setImageBlack(newimag);
+					this.getCell().setPiece(newKnight);
+					newKnight.getImage().setOnMouseClicked(mouseEvent -> newKnight.clickEvent(0));
+
+					break;
+				default:
+					System.out.println("chose a valid a move :");
+			}
+			return true;
+		}
+		return false;
 	}
 public static void main(String[] args){
 
